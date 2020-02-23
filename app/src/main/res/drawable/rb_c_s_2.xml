@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 選択時の設定 -->
+    <item android:state_checked="true">
+        <shape android:shape="rectangle">
+            <!-- 背景色 -->
+            <solid android:color="@color/category2_1" />
+        </shape>
+    </item>
+
+    <!-- 非選択時の設定 -->
+    <item android:state_checked="false">
+        <shape android:shape="rectangle">
+            <!-- 背景色 -->
+            <solid android:color="@color/category2" />
+            <!-- 枠色 -->
+            <stroke
+                android:width="2dp"
+                android:color="@color/category2_1" />
+        </shape>
+    </item>
+</selector>
