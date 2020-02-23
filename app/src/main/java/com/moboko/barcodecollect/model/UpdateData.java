@@ -15,6 +15,7 @@ import static com.moboko.barcodecollect.util.Consts.MEMO2;
 import static com.moboko.barcodecollect.util.Consts.PRICE;
 import static com.moboko.barcodecollect.util.Consts.REGISTER_DAY;
 import static com.moboko.barcodecollect.util.Consts.TAX_DIV;
+import static com.moboko.barcodecollect.util.Consts.TAX_PRICE;
 
 public class UpdateData {
     private DbOpenHelper helper;
@@ -41,6 +42,7 @@ public class UpdateData {
                 + CATEGORY_CD  + " = '" + dbItemList.getCategoryCd() + "',"
                 + PRICE  + " = " + dbItemList.getPrice() + ","
                 + TAX_DIV  + " = '" + dbItemList.getTaxDiv() + "',"
+                + TAX_PRICE + " = " + dbItemList.getTaxPrice() + ","
                 + MEMO1  + " = '" + dbItemList.getMemo1() + "',"
                 + MEMO2  + " = '" + dbItemList.getMemo2() + "',"
                 + REGISTER_DAY  + " = '" + dbItemList.getRegisterDay() + "' "

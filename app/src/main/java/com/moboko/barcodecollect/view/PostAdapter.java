@@ -26,7 +26,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
     View.OnClickListener m_listener;
     int m_line;
     int mSelectMode;
-    private ArrayList<Integer> selectList = new ArrayList<>();
 
 
     public PostAdapter(Context context, List<ItemList> itemList, int selectMode) {
@@ -49,10 +48,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final PostViewHolder holder, final int position) {
         final int pos = position;
 
         final ItemList item = itemLists.get(position);
+
+        holder.cbSelect.setOnCheckedChangeListener(null);
+
+        holder.cbSelect.setChecked(item.getCbSelected());
 
         if (mSelectMode == NORMAL_MODE) {
 
@@ -64,11 +67,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
         } else if (mSelectMode == OPTION_ALL_SELECT) {
             setOptionView(holder);
             holder.cbSelect.setChecked(true);
-            selectList.add(item.get_id());
+            itemLists.set(position, item);
         } else if (mSelectMode == OPTION_ALL_FAVORITE) {
             setOptionView(holder);
             if (item.getFavoriteFlag() == 1) {
-                selectList.add(item.get_id());
                 holder.cbSelect.setChecked(true);
             }
         }
@@ -83,20 +85,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
                 holder.cbFavoriteButton.setChecked(true);
                 break;
         }
-
-        int inputPrice = item.getPrice();
-        switch (item.getTaxDiv()) {
-            case "1":
-                holder.tvItemPrice.setText(String.valueOf(item.getPrice()));
-                break;
-            case "2":
-                holder.tvItemPrice.setText(String.valueOf((int) Math.floor(inputPrice * 1.08)));
-                break;
-            case "3":
-                holder.tvItemPrice.setText(String.valueOf((int) Math.floor(inputPrice * 1.1)));
-                break;
-        }
-
+        String priceStr = "¥" + String.format("%,d", item.getTaxPrice());
+        holder.tvItemPrice.setText(priceStr);
 
         Resources res = mContext.getResources();
         switch (item.getCategoryCd()) {
@@ -130,17 +120,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
         holder.cbSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    selectList.add(item.get_id());
-                } else {
-                    selectList.remove(selectList.indexOf(item.get_id()));
+                if (holder.cbSelect.isPressed()) {
+                    item.setCbSelected(isChecked);
+                    itemLists.set(position, item);
                 }
             }
         });
     }
 
     private void setOptionView(PostViewHolder holder) {
+        Resources res = mContext.getResources();
         holder.cbSelect.setVisibility(View.VISIBLE);
+        holder.cbFavoriteButton.setButtonDrawable(res.getDrawable(R.drawable.dis_favorite_button));
         holder.cbFavoriteButton.setEnabled(false);
     }
 
@@ -154,9 +145,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
     }
 
     public ArrayList<Integer> getSelectList() {
+        ArrayList<Integer> selectList = new ArrayList<>();
+        for (int i = 0; i < itemLists.size(); i++) {
+            if(itemLists.get(i).getCbSelected()){
+                selectList.add(itemLists.get(i).get_id());
+            }
+        }
         return selectList;
-    }
-    public void setSelectList() {
-        selectList.clear();
     }
 }

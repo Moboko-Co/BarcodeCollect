@@ -35,6 +35,7 @@ public class InsertData {
                 + CATEGORY_CD + ","
                 + PRICE + ","
                 + TAX_DIV + ","
+                + TAX_PRICE + ","
                 + MEMO1 + ","
                 + MEMO2 + ","
                 + DELETE_FLAG + ","
@@ -43,7 +44,8 @@ public class InsertData {
                 + dbItemList.getJanCd() + "', '"
                 + dbItemList.getCategoryCd() + "', "
                 + dbItemList.getPrice() + ", '"
-                + dbItemList.getTaxDiv() + "', '"
+                + dbItemList.getTaxDiv() + "', "
+                + dbItemList.getTaxPrice() + ", '"
                 + dbItemList.getMemo1() + "', '"
                 + dbItemList.getMemo2() + "', '"
                 + dbItemList.getDeleteFlag() + "', '"
@@ -53,11 +55,10 @@ public class InsertData {
     }
 
     public boolean insertDbFavoriteList() {
-        //String sql = "insert into favoriteList (pKey,favoriteFlag) values('2020/2/1 12:00','0');";
         String sql = "insert into favoriteList ("
                 + FAVORITE_FLAG
-                + ") values ('"
-                + dbFavoriteList.getFavoriteFlag() + "');";
+                + ") values ("
+                + dbFavoriteList.getFavoriteFlag() + ");";
         db.execSQL(sql);
         return true;
     }

@@ -5,11 +5,29 @@ public class ItemList {
     String registerDay;
     String janCd;
     String categoryCd;
-    int Price;
+    int price;
     String taxDiv;
+    int taxPrice;
     String memo1;
     String memo2;
     int favoriteFlag;
+    boolean cbSelected;
+
+    public int getTaxPrice() {
+        return taxPrice;
+    }
+
+    public void setTaxPrice(int taxPrice) {
+        this.taxPrice = taxPrice;
+    }
+
+    public boolean getCbSelected() {
+        return cbSelected;
+    }
+
+    public void setCbSelected(boolean cbSelected) {
+        this.cbSelected = cbSelected;
+    }
 
     public int get_id() {
         return _id;
@@ -44,11 +62,11 @@ public class ItemList {
     }
 
     public int getPrice() {
-        return Price;
+        return price;
     }
 
     public void setPrice(int price) {
-        Price = price;
+        this.price = price;
     }
 
     public String getTaxDiv() {

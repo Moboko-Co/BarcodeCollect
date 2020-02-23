@@ -6,9 +6,19 @@ public class DbItemList {
     String categoryCd;
     int Price;
     String taxDiv;
+    int taxPrice;
     String memo1;
     String memo2;
     String deleteFlag;
+
+
+    public int getTaxPrice() {
+        return taxPrice;
+    }
+
+    public void setTaxPrice(int taxPrice) {
+        this.taxPrice = taxPrice;
+    }
 
     public int get_id() {
         return _id;

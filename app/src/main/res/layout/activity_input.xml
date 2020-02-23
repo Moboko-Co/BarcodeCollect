@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_input"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_edit_option"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="top"
+        android:padding="5dp">
+
+        <Button
+            android:id="@+id/bt_back"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:background="@null"
+            android:text="@string/back" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/input_ad"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#000000" />
 
     <LinearLayout
         android:id="@+id/ll_input_group"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -17,22 +41,26 @@
 
             <TextView
                 android:id="@+id/tv_const_jan_cd"
-                android:layout_width="90dp"
-                android:layout_height="match_parent"
+                android:layout_width="95dp"
+                android:layout_height="55dp"
                 android:layout_centerVertical="true"
                 android:gravity="center"
-                android:text="JANコード" />
+                android:text="@string/jan_cd" />
 
             <TextView
                 android:id="@+id/tv_input_jan_cd"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_toRightOf="@id/tv_const_jan_cd"
-                android:textIsSelectable="true"
-                android:gravity= "center" />
+                android:layout_toEndOf="@id/tv_const_jan_cd"
+                android:gravity="center|left"
+                android:textIsSelectable="true" />
 
         </RelativeLayout>
-
+        <View
+            android:layout_marginHorizontal="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grayLine" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -44,57 +72,62 @@
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:gravity="center"
-                android:text="カテゴリ" />
+                android:text="@string/category" />
 
             <RadioGroup
                 android:id="@+id/rg_category"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_toRightOf="@id/tv_input_category"
+                android:layout_toEndOf="@id/tv_input_category"
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
                     android:id="@+id/rb_c_1"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
                     android:background="@drawable/rb_c_s_1"
                     android:button="@null"
-                    android:text="　"/>
+                    android:text="@string/space" />
 
                 <RadioButton
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
                     android:id="@+id/rb_c_2"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
                     android:background="@drawable/rb_c_s_2"
                     android:button="@null"
-                    android:text="　"/>
+                    android:text="@string/space" />
 
                 <RadioButton
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
                     android:id="@+id/rb_c_3"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
                     android:background="@drawable/rb_c_s_3"
                     android:button="@null"
-                    android:text="　"/>
+                    android:text="@string/space" />
             </RadioGroup>
 
         </RelativeLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@color/grayLine" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="120dp"
@@ -106,12 +139,12 @@
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:gravity="center"
-                android:text="金額" />
+                android:text="@string/price" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_toRightOf="@id/tv_input_price"
+                android:layout_toEndOf="@id/tv_input_price"
                 android:orientation="vertical">
 
                 <RadioGroup
@@ -119,7 +152,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_margin="5dp"
-                    android:layout_toRightOf="@id/tv_input_price"
                     android:orientation="horizontal">
 
                     <RadioButton
@@ -129,7 +161,7 @@
                         android:layout_weight="1"
                         android:button="@null"
                         android:gravity="center"
-                        android:text="税込" />
+                        android:text="@string/tax_1" />
 
                     <RadioButton
                         android:id="@+id/rb_t_2"
@@ -138,7 +170,7 @@
                         android:layout_weight="1"
                         android:button="@null"
                         android:gravity="center"
-                        android:text="8%" />
+                        android:text="@string/tax_2" />
 
                     <RadioButton
                         android:id="@+id/rb_t_3"
@@ -147,30 +179,31 @@
                         android:layout_weight="1"
                         android:button="@null"
                         android:gravity="center"
-                        android:text="10%" />
+                        android:text="@string/tax_3" />
                 </RadioGroup>
 
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginLeft="5dp">
+                    android:layout_marginStart="5dp">
 
                     <EditText
                         android:id="@+id/ev_input_price"
                         android:layout_width="120dp"
                         android:layout_height="match_parent"
+                        android:hint="@string/_0"
                         android:inputType="phone"
-                        android:nextFocusDown="@id/ev_input_memo1"
-                        android:hint="0" />
+                        android:nextFocusDown="@id/ev_input_memo1" />
 
                     <TextView
                         android:id="@+id/tv_output_price"
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
-                        android:layout_toRightOf="@id/ev_input_price"
+                        android:layout_toEndOf="@id/ev_input_price"
                         android:gravity="center"
-                        android:text="0" />
+                        android:text="@string/_0"
+                        android:visibility="invisible" />
 
                 </RelativeLayout>
 
@@ -178,6 +211,11 @@
 
         </RelativeLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@color/grayLine" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -189,19 +227,24 @@
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:gravity="center"
-                android:text="メモ１" />
+                android:text="@string/memo_1" />
 
             <EditText
                 android:id="@+id/ev_input_memo1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_toEndOf="@id/tv_input_memo1"
                 android:inputType="text"
-                android:nextFocusDown="@id/ev_input_memo2"
-                android:layout_toRightOf="@id/tv_input_memo1" />
+                android:nextFocusDown="@id/ev_input_memo2" />
 
 
         </RelativeLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@color/grayLine" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -213,17 +256,22 @@
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:gravity="center"
-                android:text="メモ２" />
+                android:text="@string/memo_2" />
 
             <EditText
                 android:id="@+id/ev_input_memo2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="text"
-                android:layout_toRightOf="@id/tv_input_memo2" />
+                android:layout_toEndOf="@id/tv_input_memo2"
+                android:inputType="text" />
 
         </RelativeLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@color/grayLine" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -235,47 +283,50 @@
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:gravity="center"
-                android:text="登録日" />
+                android:text="@string/register_day" />
 
             <TextView
                 android:id="@+id/tv_input_register_day"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_toRightOf="@id/tv_const_register_day" />
+                android:layout_toEndOf="@id/tv_const_register_day"
+                android:gravity="center" />
 
         </RelativeLayout>
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grayLine" />
+
     <LinearLayout
         android:id="@+id/ll_button_group"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="bottom"
         android:orientation="horizontal"
         android:padding="5dp">
-
-        <Button
-            android:id="@+id/bt_back"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="戻る" />
 
         <Button
             android:id="@+id/bt_continue"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="続けて登録" />
+            android:drawableTop="@drawable/ic_barcode"
+            android:background="@null"
+            android:text="@string/continue_regist" />
 
         <Button
             android:id="@+id/bt_finish"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:drawableTop="@drawable/complete"
             android:layout_weight="1"
-            android:text="完了" />
+            android:background="@null"
+            android:text="@string/finish" />
 
 
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

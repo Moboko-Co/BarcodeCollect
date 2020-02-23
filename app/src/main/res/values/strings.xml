@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">BarcodeCollect</string>
+    <string name="jan_cd">JANコード</string>
+    <string name="back">戻る</string>
+    <string name="category">カテゴリ</string>
+    <string name="space" />
+    <string name="price">金額</string>
+    <string name="tax_1">税込</string>
+    <string name="tax_2">8%</string>
+    <string name="tax_3">10%</string>
+    <string name="memo_1">メモ１</string>
+    <string name="memo_2">メモ２</string>
+    <string name="register_day">登録日</string>
+    <string name="continue_regist">続けて登録</string>
+    <string name="finish">完了</string>
+    <string name="_0">0</string>
+    <string name="copy">コピー</string>
+    <string name="delete">削除</string>
+    <string name="scan">読み取り</string>
+    <string name="select">選択</string>
 </resources>

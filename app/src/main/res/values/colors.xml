@@ -11,4 +11,6 @@
     <color name="category2">#80cbc4</color>
     <color name="category3">#ffd54f</color>
     <color name="category3_1">#c09200</color>
+
+    <color name="grayLine">#d9d9d9</color>
 </resources>
