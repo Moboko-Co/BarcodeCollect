@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -72,7 +73,7 @@ public class InputActivity extends AppCompatActivity {
     Button btContinue;
 
     InputMethodManager inputMethodManager;
-    private LinearLayout llInput;
+    private RelativeLayout llInput;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -262,6 +263,9 @@ public class InputActivity extends AppCompatActivity {
             case R.id.rb_c_3:
                 inputItem.setCategoryCd("03");
                 break;
+            case R.id.rb_c_4:
+                inputItem.setCategoryCd("04");
+                break;
         }
         inputItem.setPrice(Integer.parseInt(String.valueOf(evInputPrice.getText())));
         inputItem.setTaxDiv(setPrice((RadioButton) findViewById(rgTax.getCheckedRadioButtonId())));
@@ -331,6 +335,9 @@ public class InputActivity extends AppCompatActivity {
                 break;
             case "03":
                 rgCategory.check(R.id.rb_c_3);
+                break;
+            case "04":
+                rgCategory.check(R.id.rb_c_4);
                 break;
         }
         evInputPrice.setText(String.valueOf(itemList.get(0).getPrice()));

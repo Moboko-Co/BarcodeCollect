@@ -2,6 +2,7 @@ package com.moboko.barcodecollect.view;
 
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -16,9 +17,10 @@ public class PostViewHolder extends RecyclerView.ViewHolder{
 
     public CheckBox cbSelect,cbFavoriteButton;
     public View ivLabelImg;
-    public TextView tvJanCd,tvItemPrice,tvItemMemo1;
+    public TextView tvItemPrice,tvItemMemo1;
     public LinearLayout llItemDetail;
     public ImageButton ibDeleteData;
+    public Button bJanCd;
 
     public PostAdapter mAdapter;
 
@@ -29,7 +31,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder{
 
         cbSelect = itemView.findViewById(R.id.cb_select);
         ivLabelImg = itemView.findViewById(R.id.iv_label_img);
-        tvJanCd = itemView.findViewById(R.id.tv_jan_cd);
+        bJanCd = itemView.findViewById(R.id.b_jan_cd);
         tvItemMemo1 = itemView.findViewById(R.id.tv_item_memo_1);
         tvItemPrice = itemView.findViewById(R.id.tv_item_price);
         cbFavoriteButton = itemView.findViewById(R.id.cb_favorite_button);

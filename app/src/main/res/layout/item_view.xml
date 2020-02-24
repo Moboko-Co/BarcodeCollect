@@ -1,67 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="8dp"
+    android:id="@+id/item_view"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:id="@+id/item_view">
+    android:layout_height="70dp"
+    android:paddingHorizontal="8dp"
+    android:paddingVertical="2dp">
 
-    <CheckBox
-        android:id="@+id/cb_select"
-        android:layout_width="40dp"
-        android:layout_height="60dp"
-        android:visibility="gone"
-        android:layout_alignParentLeft="true"/>
-
-    <View
-        android:id="@+id/iv_label_img"
-        android:layout_width="12dp"
-        android:layout_height="60dp"
-        android:layout_toRightOf="@+id/cb_select"/>
-
-    <LinearLayout
-        android:id="@+id/ll_item_detail"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="vertical"
-        android:layout_toRightOf="@id/iv_label_img"
-        android:layout_toLeftOf="@id/cb_favorite_button">
+        android:layout_height="match_parent"
+        android:background="@color/whiteDetail">
 
-        <RelativeLayout
+        <CheckBox
+            android:id="@+id/cb_select"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:layout_alignParentLeft="true"
+            android:visibility="gone" />
+
+        <View
+            android:id="@+id/iv_label_img"
+            android:layout_width="12dp"
+            android:layout_height="60dp"
+            android:layout_toRightOf="@+id/cb_select" />
+
+        <LinearLayout
+            android:id="@+id/ll_item_detail"
             android:layout_width="match_parent"
-            android:layout_height="26dp">
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@id/cb_favorite_button"
+            android:layout_toRightOf="@id/iv_label_img"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp">
+
+                <Button
+                    android:id="@+id/b_jan_cd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginVertical="1dp"
+                    android:background="@null" />
+
+                <TextView
+                    android:id="@+id/tv_item_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:text="123212" />
+            </RelativeLayout>
 
             <TextView
-                android:id="@+id/tv_jan_cd"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:textIsSelectable="true"
-                />
-            <TextView
-                android:id="@+id/tv_item_price"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:text="123212"
-                />
-        </RelativeLayout>
-        <TextView
-            android:id="@+id/tv_item_memo_1"
-            android:layout_width="match_parent"
-            android:layout_height="26dp"
-            android:text="アイスコーヒ"
-            />
-    </LinearLayout>
+                android:id="@+id/tv_item_memo_1"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="アイスコーヒ" />
+        </LinearLayout>
 
-    <CheckBox
-        android:layout_centerVertical="true"
-        android:id="@+id/cb_favorite_button"
-        android:button="@drawable/favorite_button"
-        android:layout_alignParentRight="true"
-        android:layout_width="40dp"
-        android:layout_height="58dp"
-        android:scaleType="center"
-        />
+        <CheckBox
+            android:id="@+id/cb_favorite_button"
+            android:layout_width="40dp"
+            android:layout_height="58dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:button="@drawable/favorite_button"
+            android:scaleType="center" />
+    </RelativeLayout>
 </RelativeLayout>

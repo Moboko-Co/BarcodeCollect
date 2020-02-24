@@ -23,6 +23,9 @@ public class Consts {
     public static final String UPDATE_PROC = "updateProc";
     public static final String INSERT_PROC = "insertProc";
 
+    public static final String MONO_URI_HEAD = "https://mnrate.com/search?kwd=";
+    public static final String MONO_URI_TAIL = "&i=all";
+
     // データーベースのバージョン
     public static final int DATABASE_VERSION = 1;
 

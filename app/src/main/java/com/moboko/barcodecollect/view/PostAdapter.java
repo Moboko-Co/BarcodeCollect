@@ -1,7 +1,9 @@
 package com.moboko.barcodecollect.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -74,8 +76,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
                 holder.cbSelect.setChecked(true);
             }
         }
-        holder.tvItemMemo1.setText(String.valueOf(item.getMemo1()));
-        holder.tvJanCd.setText(String.valueOf(item.getJanCd()));
+        holder.tvItemMemo1.setText(item.getMemo1());
+        holder.bJanCd.setText(item.getJanCd());
 
         switch (item.getFavoriteFlag()) {
             case 0:
@@ -98,6 +100,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
                 break;
             case "03":
                 holder.ivLabelImg.setBackgroundColor(res.getColor(R.color.category3));
+                break;
+            case "04":
+                holder.ivLabelImg.setBackgroundColor(res.getColor(R.color.category4));
                 break;
         }
 
@@ -124,6 +129,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
                     item.setCbSelected(isChecked);
                     itemLists.set(position, item);
                 }
+            }
+        });
+
+        holder.bJanCd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uri = MONO_URI_HEAD + item.getJanCd() + MONO_URI_TAIL;
+                Intent monoIntent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(uri));
+                mContext.startActivity(monoIntent);
             }
         });
     }

@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_input"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
+    android:background="@color/allBack"
     android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/rl_edit_option"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/topBack"
         android:gravity="top"
         android:padding="5dp">
 
@@ -22,18 +25,23 @@
             android:text="@string/back" />
     </RelativeLayout>
 
+
     <ImageView
         android:id="@+id/input_ad"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:layout_below="@+id/rl_edit_option"
         android:background="#000000" />
 
     <LinearLayout
         android:id="@+id/ll_input_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/input_ad"
+        android:layout_marginTop="5dp"
+        android:layout_marginHorizontal="8dp"
+        android:background="@color/whiteDetail"
         android:orientation="vertical">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -44,7 +52,7 @@
                 android:layout_width="95dp"
                 android:layout_height="55dp"
                 android:layout_centerVertical="true"
-                android:gravity="center"
+                android:gravity="left|center"
                 android:text="@string/jan_cd" />
 
             <TextView
@@ -57,10 +65,10 @@
 
         </RelativeLayout>
         <View
-            android:layout_marginHorizontal="15dp"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/grayLine" />
+            android:layout_height="4dp"
+            android:background="@color/allBack" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -71,13 +79,14 @@
                 android:layout_width="90dp"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:gravity="center"
+                android:gravity="left|center"
                 android:text="@string/category" />
 
             <RadioGroup
                 android:id="@+id/rg_category"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginHorizontal="3dp"
                 android:layout_toEndOf="@id/tv_input_category"
                 android:orientation="horizontal">
 
@@ -85,10 +94,8 @@
                     android:id="@+id/rb_c_1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginHorizontal="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/rb_c_s_1"
                     android:button="@null"
@@ -98,10 +105,8 @@
                     android:id="@+id/rb_c_2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginHorizontal="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/rb_c_s_2"
                     android:button="@null"
@@ -111,12 +116,21 @@
                     android:id="@+id/rb_c_3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginHorizontal="5dp"
                     android:layout_weight="1"
                     android:background="@drawable/rb_c_s_3"
+                    android:button="@null"
+                    android:text="@string/space" />
+
+                <RadioButton
+                    android:id="@+id/rb_c_4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rb_c_s_4"
                     android:button="@null"
                     android:text="@string/space" />
             </RadioGroup>
@@ -125,9 +139,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="15dp"
-            android:background="@color/grayLine" />
+            android:layout_height="4dp"
+            android:background="@color/allBack" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="120dp"
@@ -138,7 +152,7 @@
                 android:layout_width="90dp"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:gravity="center"
+                android:gravity="left|center"
                 android:text="@string/price" />
 
             <LinearLayout
@@ -156,29 +170,41 @@
 
                     <RadioButton
                         android:id="@+id/rb_t_1"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:button="@null"
                         android:gravity="center"
+                        android:layout_marginVertical="8dp"
+                        android:layout_marginHorizontal="13dp"
+                        android:background="@drawable/rb_t_s_1"
+                        android:textColor="@drawable/rb_t_t_all"
                         android:text="@string/tax_1" />
 
                     <RadioButton
                         android:id="@+id/rb_t_2"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:button="@null"
                         android:gravity="center"
+                        android:layout_marginVertical="8dp"
+                        android:layout_marginHorizontal="13dp"
+                        android:background="@drawable/rb_t_s_2"
+                        android:textColor="@drawable/rb_t_t_all"
                         android:text="@string/tax_2" />
 
                     <RadioButton
                         android:id="@+id/rb_t_3"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:button="@null"
                         android:gravity="center"
+                        android:layout_marginVertical="8dp"
+                        android:layout_marginHorizontal="13dp"
+                        android:background="@drawable/rb_t_s_3"
+                        android:textColor="@drawable/rb_t_t_all"
                         android:text="@string/tax_3" />
                 </RadioGroup>
 
@@ -213,9 +239,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="15dp"
-            android:background="@color/grayLine" />
+            android:layout_height="4dp"
+            android:background="@color/allBack" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -226,7 +252,7 @@
                 android:layout_width="90dp"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:gravity="center"
+                android:gravity="left|center"
                 android:text="@string/memo_1" />
 
             <EditText
@@ -242,9 +268,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="15dp"
-            android:background="@color/grayLine" />
+            android:layout_height="4dp"
+            android:background="@color/allBack" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -255,7 +281,7 @@
                 android:layout_width="90dp"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:gravity="center"
+                android:gravity="left|center"
                 android:text="@string/memo_2" />
 
             <EditText
@@ -269,9 +295,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginHorizontal="15dp"
-            android:background="@color/grayLine" />
+            android:layout_height="4dp"
+            android:background="@color/allBack" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -282,7 +308,7 @@
                 android:layout_width="90dp"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:gravity="center"
+                android:gravity="left|center"
                 android:text="@string/register_day" />
 
             <TextView
@@ -290,7 +316,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toEndOf="@id/tv_const_register_day"
-                android:gravity="center" />
+                android:gravity="left|center" />
 
         </RelativeLayout>
     </LinearLayout>
@@ -298,20 +324,21 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_above="@+id/ll_button_group"
         android:background="@color/grayLine" />
 
     <LinearLayout
         android:id="@+id/ll_button_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:gravity="bottom"
+        android:background="@color/whiteDetail"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:padding="5dp">
 
         <Button
             android:id="@+id/bt_continue"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:drawableTop="@drawable/ic_barcode"
@@ -320,13 +347,13 @@
 
         <Button
             android:id="@+id/bt_finish"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:drawableTop="@drawable/complete"
+            android:drawableTop="@drawable/ic_check_24px"
             android:layout_weight="1"
             android:background="@null"
             android:text="@string/finish" />
 
 
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>
