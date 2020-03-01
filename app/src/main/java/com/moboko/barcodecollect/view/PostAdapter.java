@@ -93,16 +93,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
         Resources res = mContext.getResources();
         switch (item.getCategoryCd()) {
             case "01":
-                holder.ivLabelImg.setBackgroundColor(res.getColor(R.color.category1));
+                holder.ivLabelImg.setBackgroundColor(res.getColor(R.color.category1_1));
                 break;
             case "02":
-                holder.ivLabelImg.setBackgroundColor(res.getColor(R.color.category2));
+                holder.ivLabelImg.setBackgroundColor(res.getColor(R.color.category2_1));
                 break;
             case "03":
-                holder.ivLabelImg.setBackgroundColor(res.getColor(R.color.category3));
+                holder.ivLabelImg.setBackgroundColor(res.getColor(R.color.category3_1));
                 break;
             case "04":
-                holder.ivLabelImg.setBackgroundColor(res.getColor(R.color.category4));
+                holder.ivLabelImg.setBackgroundColor(res.getColor(R.color.category4_1));
                 break;
         }
 

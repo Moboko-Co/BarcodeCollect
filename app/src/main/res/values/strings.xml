@@ -18,4 +18,11 @@
     <string name="delete">削除</string>
     <string name="scan">読み取り</string>
     <string name="select">選択</string>
+    <string name="calc_result">計算結果</string>
+    <string name="sale">割引</string>
+
+    <string name="et_text_size">13sp</string>
+    <string name="tax">税率</string>
+    <string name="yen">円</string>
+    <string name="_000000000">000000000</string>
 </resources>

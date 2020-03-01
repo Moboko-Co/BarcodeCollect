@@ -5,13 +5,13 @@
     <color name="colorAccent">#D81B60</color>
 
 
-    <color name="category1">#E1B4D3</color>
+    <color name="category1">#33E1B4D3</color>
     <color name="category1_1">#E1B4D3</color>
     <color name="category2_1">#AEDDEF</color>
-    <color name="category2">#AEDDEF</color>
-    <color name="category3">#EAD880</color>
+    <color name="category2">#33AEDDEF</color>
+    <color name="category3">#33EAD880</color>
     <color name="category3_1">#EAD880</color>
-    <color name="category4">#B1D3C5</color>
+    <color name="category4">#33B1D3C5</color>
     <color name="category4_1">#B1D3C5</color>
 
     <color name="tax1">#EECFBB</color>
@@ -21,6 +21,7 @@
     <color name="textGray">#666666</color>
 
     <color name="whiteDetail">#FFFFFF</color>
+    <color name="detail_background">#FFFFFF</color>
     <color name="grayLine">#d9d9d9</color>
     <color name="allBack">#F7EAE2</color>
     <color name="topBack">#FFFFFF</color>

@@ -225,7 +225,7 @@ public class InputActivity extends AppCompatActivity {
             tvOutputPrice.setText(String.valueOf(0));
         }
 
-        String priceStr = "¥";
+        String priceStr = new String();
         switch (rbTax.getId()) {
             case R.id.rb_t_1:
                 priceStr = priceStr + String.format("%,d", inputPrice);
@@ -309,7 +309,7 @@ public class InputActivity extends AppCompatActivity {
         tvInputJanCd.setText(itemList.get(0).getJanCd());
         tvInputRegisterDay.setText(itemList.get(0).getRegisterDay());
 
-        String priceStr = "¥" + String.format("%,d", itemList.get(0).getTaxPrice());
+        String priceStr = String.format("%,d", itemList.get(0).getTaxPrice());
         // ラジオボタン初期化
         switch (itemList.get(0).getTaxDiv()) {
             case "1":

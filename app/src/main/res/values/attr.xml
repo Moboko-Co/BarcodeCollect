@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="detail_background" format="reference"></attr>
+</resources>

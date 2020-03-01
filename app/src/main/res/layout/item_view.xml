@@ -51,15 +51,13 @@
                     android:id="@+id/tv_item_price"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:text="123212" />
+                    android:layout_alignParentRight="true"/>
             </RelativeLayout>
 
             <TextView
                 android:id="@+id/tv_item_memo_1"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:text="アイスコーヒ" />
+                android:layout_height="30dp"/>
         </LinearLayout>
 
         <CheckBox

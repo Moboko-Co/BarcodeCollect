@@ -3,9 +3,9 @@
     android:id="@+id/ll_input"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusableInTouchMode="true"
     android:background="@color/allBack"
-    android:orientation="vertical">
+    android:focusableInTouchMode="true">
+
 
     <RelativeLayout
         android:id="@+id/rl_edit_option"
@@ -30,330 +30,301 @@
         android:id="@+id/input_ad"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_below="@+id/rl_edit_option"
+        android:layout_below="@id/rl_edit_option"
         android:background="#000000" />
 
-    <LinearLayout
-        android:id="@+id/ll_input_group"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/input_ad"
-        android:layout_marginTop="5dp"
-        android:layout_marginHorizontal="8dp"
-        android:background="@color/whiteDetail"
-        android:orientation="vertical">
-        <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_below="@id/input_ad"
+        android:background="@color/allBack"
+        android:fillViewport="true">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:padding="5dp">
-
-            <TextView
-                android:id="@+id/tv_const_jan_cd"
-                android:layout_width="95dp"
-                android:layout_height="55dp"
-                android:layout_centerVertical="true"
-                android:gravity="left|center"
-                android:text="@string/jan_cd" />
-
-            <TextView
-                android:id="@+id/tv_input_jan_cd"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toEndOf="@id/tv_const_jan_cd"
-                android:gravity="center|left"
-                android:textIsSelectable="true" />
-
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@color/allBack" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:padding="5dp">
-
-            <TextView
-                android:id="@+id/tv_input_category"
-                android:layout_width="90dp"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:gravity="left|center"
-                android:text="@string/category" />
-
-            <RadioGroup
-                android:id="@+id/rg_category"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="3dp"
-                android:layout_toEndOf="@id/tv_input_category"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/rb_c_1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/rb_c_s_1"
-                    android:button="@null"
-                    android:text="@string/space" />
-
-                <RadioButton
-                    android:id="@+id/rb_c_2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/rb_c_s_2"
-                    android:button="@null"
-                    android:text="@string/space" />
-
-                <RadioButton
-                    android:id="@+id/rb_c_3"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/rb_c_s_3"
-                    android:button="@null"
-                    android:text="@string/space" />
-
-                <RadioButton
-                    android:id="@+id/rb_c_4"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginVertical="10dp"
-                    android:layout_marginHorizontal="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/rb_c_s_4"
-                    android:button="@null"
-                    android:text="@string/space" />
-            </RadioGroup>
-
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@color/allBack" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:padding="5dp">
-
-            <TextView
-                android:id="@+id/tv_input_price"
-                android:layout_width="90dp"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:gravity="left|center"
-                android:text="@string/price" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/ll_input_group"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toEndOf="@id/tv_input_price"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="5dp">
 
-                <RadioGroup
-                    android:id="@+id/rg_tax"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:layout_margin="5dp"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/rb_t_1"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:layout_marginVertical="8dp"
-                        android:layout_marginHorizontal="13dp"
-                        android:background="@drawable/rb_t_s_1"
-                        android:textColor="@drawable/rb_t_t_all"
-                        android:text="@string/tax_1" />
-
-                    <RadioButton
-                        android:id="@+id/rb_t_2"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:layout_marginVertical="8dp"
-                        android:layout_marginHorizontal="13dp"
-                        android:background="@drawable/rb_t_s_2"
-                        android:textColor="@drawable/rb_t_t_all"
-                        android:text="@string/tax_2" />
-
-                    <RadioButton
-                        android:id="@+id/rb_t_3"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:layout_marginVertical="8dp"
-                        android:layout_marginHorizontal="13dp"
-                        android:background="@drawable/rb_t_s_3"
-                        android:textColor="@drawable/rb_t_t_all"
-                        android:text="@string/tax_3" />
-                </RadioGroup>
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="5dp">
-
-                    <EditText
-                        android:id="@+id/ev_input_price"
-                        android:layout_width="120dp"
-                        android:layout_height="match_parent"
-                        android:hint="@string/_0"
-                        android:inputType="phone"
-                        android:nextFocusDown="@id/ev_input_memo1" />
+                <LinearLayout style="@style/detail_small">
 
                     <TextView
+                        android:id="@+id/tv_const_jan_cd"
+                        style="@style/detail_left_small"
+                        android:text="@string/jan_cd" />
+
+                    <TextView
+                        android:id="@+id/tv_input_jan_cd"
+                        style="@style/detail_right_small"
+                        android:layout_toEndOf="@id/tv_const_jan_cd"
+                        android:textIsSelectable="true" />
+                </LinearLayout>
+
+                <View style="@style/separate_line" />
+
+                <LinearLayout style="@style/detail_small">
+
+                    <TextView
+                        android:id="@+id/tv_input_category"
+                        style="@style/detail_left_small"
+                        android:text="@string/category" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_category"
+                        style="@style/detail_right_small"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_c_1"
+                            style="@style/category_radio"
+                            android:background="@drawable/rb_c_s_1"
+                            android:text="@string/space" />
+
+                        <RadioButton
+                            android:id="@+id/rb_c_2"
+                            style="@style/category_radio"
+                            android:background="@drawable/rb_c_s_2"
+                            android:text="@string/space" />
+
+                        <RadioButton
+                            android:id="@+id/rb_c_3"
+                            style="@style/category_radio"
+                            android:background="@drawable/rb_c_s_3"
+                            android:text="@string/space" />
+
+                        <RadioButton
+                            android:id="@+id/rb_c_4"
+                            style="@style/category_radio"
+                            android:background="@drawable/rb_c_s_4"
+                            android:text="@string/space" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <View style="@style/separate_line" />
+
+                <LinearLayout style="@style/detail_big_top">
+
+                    <TextView
+                        android:id="@+id/tv_input_price"
+                        style="@style/detail_left_small"
+                        android:text="@string/price" />
+
+
+                    <RelativeLayout style="@style/detail_right_small">
+
+                        <EditText
+                            android:id="@+id/ev_input_price"
+                            style="@style/detail_edit_text"
+                            android:layout_width="100dp"
+                            android:layout_alignParentLeft="true"
+                            android:hint="@string/_0"
+                            android:inputType="phone"
+                            android:nextFocusDown="@id/ev_input_per"
+                            android:text="@string/_0" />
+                        <TextView
+                            android:id="@+id/tv_yen_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_toRightOf="@+id/ev_input_price"
+                            android:gravity="center"
+                            android:text="@string/yen" />
+
+                        <TextView
+                            android:id="@+id/tv_sale_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_toLeftOf="@+id/ev_input_per"
+                            android:gravity="center"
+                            android:text="@string/sale" />
+
+                        <EditText
+                            android:id="@+id/ev_input_per"
+                            style="@style/detail_edit_text"
+                            android:layout_width="50dp"
+                            android:layout_toLeftOf="@id/tv_sale_per"
+                            android:hint="@string/_0"
+                            android:inputType="phone"
+                            android:nextFocusDown="@id/ev_input_memo1"
+                            android:text="@string/_0" />
+
+                        <TextView
+                            android:id="@+id/tv_sale_per"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center"
+                            android:text="%" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout style="@style/detail_separate_line">
+
+                    <View style="@style/separate_left_line" />
+
+                    <View style="@style/separate_right_line" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/detail_big_mid">
+
+                    <TextView
+                        android:id="@+id/tv_tax"
+                        style="@style/detail_left_small"
+                        android:text="@string/tax" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_tax"
+                        style="@style/detail_right_small"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_t_1"
+                            style="@style/tax_radio"
+                            android:background="@drawable/rb_t_s_1"
+                            android:text="@string/tax_1" />
+
+                        <RadioButton
+                            android:id="@+id/rb_t_2"
+                            style="@style/tax_radio"
+                            android:background="@drawable/rb_t_s_2"
+                            android:text="@string/tax_2" />
+
+                        <RadioButton
+                            android:id="@+id/rb_t_3"
+                            style="@style/tax_radio"
+                            android:background="@drawable/rb_t_s_3"
+                            android:text="@string/tax_3" />
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout style="@style/detail_separate_line">
+
+                    <View style="@style/separate_left_line" />
+
+                    <View style="@style/separate_right_line" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/detail_big_bottom">
+
+                    <TextView
+                        style="@style/detail_left_small"
+                        android:text="@string/calc_result" />
+
+                    <RelativeLayout
+                        style="@style/detail_right_small">
+                    <TextView
                         android:id="@+id/tv_output_price"
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_toEndOf="@id/ev_input_price"
-                        android:gravity="center"
-                        android:text="@string/_0"
+                        android:gravity="center|left"
+                        android:text="@string/_000000000"
                         android:visibility="invisible" />
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/tv_yen_text2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_toRightOf="@+id/tv_output_price"
+                            android:gravity="center"
+                            android:text="@string/yen" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <View style="@style/separate_line" />
+
+            <LinearLayout style="@style/detail_small">
+
+                <TextView
+                    android:id="@+id/tv_input_memo1"
+                    style="@style/detail_left_small"
+                    android:text="@string/memo_1" />
+
+                <LinearLayout style="@style/detail_right_small">
+
+                    <EditText
+                        android:id="@+id/ev_input_memo1"
+                        style="@style/detail_edit_text"
+                        android:layout_width="match_parent"
+                        android:inputType="text"
+                        android:nextFocusDown="@id/ev_input_memo2" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View style="@style/separate_line" />
+
+            <LinearLayout style="@style/detail_small">
+
+                <TextView
+                    android:id="@+id/tv_input_memo2"
+                    style="@style/detail_left_small"
+                    android:text="@string/memo_2" />
+
+                <LinearLayout style="@style/detail_right_small">
+
+                    <EditText
+                        android:id="@+id/ev_input_memo2"
+                        style="@style/detail_edit_text"
+                        android:layout_width="match_parent"
+                        android:inputType="text" />
+                </LinearLayout>
 
             </LinearLayout>
 
-        </RelativeLayout>
+            <View style="@style/separate_line" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@color/allBack" />
+            <LinearLayout style="@style/detail_small">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:padding="5dp">
+                <TextView
+                    android:id="@+id/tv_const_register_day"
+                    style="@style/detail_left_small"
+                    android:text="@string/register_day" />
 
-            <TextView
-                android:id="@+id/tv_input_memo1"
-                android:layout_width="90dp"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:gravity="left|center"
-                android:text="@string/memo_1" />
+                <TextView
+                    android:id="@+id/tv_input_register_day"
+                    style="@style/detail_right_small" />
 
-            <EditText
-                android:id="@+id/ev_input_memo1"
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_button_group"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_toEndOf="@id/tv_input_memo1"
-                android:inputType="text"
-                android:nextFocusDown="@id/ev_input_memo2" />
+                android:background="@color/allBack"
+                android:gravity="bottom"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/bt_continue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/ib_frame_top"
+                    android:drawableTop="@drawable/ic_barcode"
+                    android:text="@string/continue_regist" />
+
+                <Button
+                    android:id="@+id/bt_finish"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/ib_frame_top"
+                    android:drawableTop="@drawable/ic_check_24px"
+                    android:text="@string/finish" />
 
 
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@color/allBack" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:padding="5dp">
-
-            <TextView
-                android:id="@+id/tv_input_memo2"
-                android:layout_width="90dp"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:gravity="left|center"
-                android:text="@string/memo_2" />
-
-            <EditText
-                android:id="@+id/ev_input_memo2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toEndOf="@id/tv_input_memo2"
-                android:inputType="text" />
-
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@color/allBack" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:padding="5dp">
-
-            <TextView
-                android:id="@+id/tv_const_register_day"
-                android:layout_width="90dp"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:gravity="left|center"
-                android:text="@string/register_day" />
-
-            <TextView
-                android:id="@+id/tv_input_register_day"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toEndOf="@id/tv_const_register_day"
-                android:gravity="left|center" />
-
-        </RelativeLayout>
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_above="@+id/ll_button_group"
-        android:background="@color/grayLine" />
-
-    <LinearLayout
-        android:id="@+id/ll_button_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/whiteDetail"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:padding="5dp">
-
-        <Button
-            android:id="@+id/bt_continue"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/ic_barcode"
-            android:background="@null"
-            android:text="@string/continue_regist" />
-
-        <Button
-            android:id="@+id/bt_finish"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:drawableTop="@drawable/ic_check_24px"
-            android:layout_weight="1"
-            android:background="@null"
-            android:text="@string/finish" />
-
-
-    </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
