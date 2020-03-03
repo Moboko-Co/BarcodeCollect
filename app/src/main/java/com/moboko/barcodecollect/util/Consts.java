@@ -26,6 +26,8 @@ public class Consts {
     public static final String MONO_URI_HEAD = "https://mnrate.com/search?kwd=";
     public static final String MONO_URI_TAIL = "&i=all";
 
+    public static final String YAHOO_URL = "";
+
     // データーベースのバージョン
     public static final int DATABASE_VERSION = 1;
 

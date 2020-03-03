@@ -34,7 +34,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.moboko.barcodecollect.util.Consts.ALERT_MESSAGE;
 import static com.moboko.barcodecollect.util.Consts.ALERT_TITLE;
@@ -61,6 +63,8 @@ public class InputActivity extends AppCompatActivity {
 
     String idProc;
 
+    FetchPostsTask fetchPostsTask;
+
     List<ItemList> itemList = new ArrayList<>();
 
     private DbOpenHelper helper;
@@ -71,6 +75,8 @@ public class InputActivity extends AppCompatActivity {
     RadioGroup rgTax, rgCategory;
     String sql;
     Button btContinue;
+    String url;
+
 
     InputMethodManager inputMethodManager;
     private RelativeLayout llInput;
@@ -146,6 +152,11 @@ public class InputActivity extends AppCompatActivity {
                         .show();
 
             } else {
+                fetchPostsTask = new FetchPostsTask();
+                fetchPostsTask.setOnCallBack();
+
+
+                fetchPostsTask.execute(url);
                 setNewValue();
             }
         } else if (idProc.equals(UPDATE_FLAG)) {

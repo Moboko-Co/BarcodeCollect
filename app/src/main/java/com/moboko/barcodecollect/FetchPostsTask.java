@@ -11,21 +11,18 @@ import java.util.Map;
 import okhttp3.Response;
 
 
-class FetchPostsTask extends AsyncTask<Map<String,String>, Void, List<ItemList>> {
+class FetchPostsTask extends AsyncTask<String, Void, List<ItemList>> {
 
     List<ItemList> resItemList = new ArrayList<>();
     private CallBackTask callbacktask;
 
     @Override
-    protected List<ItemList> doInBackground(Map<String, String>... map) {
+    protected List<ItemList> doInBackground(String... map) {
 
 
         return resItemList;
     }
 
-    private void setAmazonResponse(Response amazonResponse) {
-
-    }
 
     @Override
     protected void onPostExecute(List<ItemList> s){
@@ -36,6 +33,9 @@ class FetchPostsTask extends AsyncTask<Map<String,String>, Void, List<ItemList>>
 
     public void setOnCallBack(CallBackTask _cbj) {
         callbacktask = _cbj;
+    }
+
+    public void setOnCallBack() {
     }
 
     /**
