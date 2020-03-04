@@ -152,4 +152,58 @@ public class Consts {
         put(5, " ORDER BY a.taxPrice desc");
         put(6, " ORDER BY a.taxPrice");
     }});
+
+
+    public static final String FAVORITE_LIST_TABLE_BK = "favoriteList_bk";
+
+    public static final String ITEM_LIST_TABLE_BK = "itemList_bk";
+
+
+    public static final String SQL_DELETE_ITEM_LIST_BK =
+            "DROP TABLE IF EXISTS " + ITEM_LIST_TABLE_BK;
+
+    public static final String SQL_DELETE_FAVORITE_LIST_BK =
+            "DROP TABLE IF EXISTS " + FAVORITE_LIST_TABLE_BK;
+
+
+    public static final String SQL_INSERT_ITEM_LIST_NEW = "INSERT INTO "
+        + ITEM_LIST_TABLE + " ("
+            + ID + ","
+            + JAN_CD + ","
+            + ITEM_NM + ","
+            + CATEGORY_CD + ","
+            + PRICE + ","
+            + TAX_DIV + ","
+            + SALE_PER + ","
+            + TAX_PRICE + ","
+            + MEMO1 + ","
+            + MEMO2 + ","
+            + DELETE_FLAG + ","
+            + REGISTER_DAY +") "
+            + " SELECT "
+            + ID + ","
+            + JAN_CD + ","
+            + "新規商品" + ","
+            + CATEGORY_CD + ","
+            + PRICE + ","
+            + TAX_DIV + ","
+            + "0" + ","
+            + TAX_PRICE + ","
+            + MEMO1 + ","
+            + MEMO2 + ","
+            + DELETE_FLAG + ","
+            + REGISTER_DAY
+            + " FROM "
+            + ITEM_LIST_TABLE_BK;
+
+    public static final String SQL_INSERT_FAVORITE_LIST_NEW = "INSERT INTO "
+            + FAVORITE_LIST_TABLE + " ("
+            + ID + ","
+            + FAVORITE_FLAG + ") "
+            + " SELECT "
+            + ID + ","
+            + FAVORITE_FLAG
+            + " FROM "
+            + FAVORITE_LIST_TABLE_BK;
+
 }

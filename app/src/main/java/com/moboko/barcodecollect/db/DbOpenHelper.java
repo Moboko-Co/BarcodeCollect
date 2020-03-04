@@ -26,10 +26,17 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // アップデートの判別
-        db.execSQL(SQL_DELETE_ITEM_LIST);
-        db.execSQL(SQL_DELETE_FAVORITE_LIST);
+        db.execSQL("ALTER TABLE " + ITEM_LIST_TABLE + " RENAME TO " + ITEM_LIST_TABLE_BK);
+        db.execSQL("ALTER TABLE " + FAVORITE_LIST_TABLE + " RENAME TO " + FAVORITE_LIST_TABLE_BK);
+
         onCreate(db);
+
+        db.execSQL(SQL_INSERT_ITEM_LIST_NEW);
+        db.execSQL(SQL_INSERT_FAVORITE_LIST_NEW);
+
+
+        db.execSQL(SQL_DELETE_ITEM_LIST_BK);
+        db.execSQL(SQL_DELETE_FAVORITE_LIST_BK);
     }
 
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {

@@ -14,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -235,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
                     new AlertDialog.Builder(MainActivity.this)
                             .setTitle(DEL_ALERT_TITLE)
                             .setMessage(DEL_ALERT_MESSAGE)
-                            .setPositiveButton("はい", new DialogInterface.OnClickListener() {
+                            .setPositiveButton(ALERT_YES, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     ContentValues values = new ContentValues();
                                     values.put(DELETE_FLAG, "'1'");
@@ -253,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 }
                             })
-                            .setNegativeButton("いいえ", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(ALERT_NO, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                 }
                             })
