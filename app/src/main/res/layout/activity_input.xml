@@ -62,8 +62,25 @@
                     <TextView
                         android:id="@+id/tv_input_jan_cd"
                         style="@style/detail_right_small"
-                        android:layout_toEndOf="@id/tv_const_jan_cd"
                         android:textIsSelectable="true" />
+                </LinearLayout>
+
+                <View style="@style/separate_line" />
+
+                <LinearLayout style="@style/detail_small">
+
+                    <TextView
+                        android:id="@+id/tv_const_item_nm"
+                        style="@style/detail_left_small"
+                        android:text="@string/item_nm" />
+
+                    <EditText
+                        android:id="@+id/ev_input_item_nm"
+                        style="@style/detail_edit_text"
+                        android:layout_width="0dp"
+                        android:layout_weight="2.5"
+                        android:inputType="text"
+                        android:nextFocusDown="@id/ev_input_price" />
                 </LinearLayout>
 
                 <View style="@style/separate_line" />

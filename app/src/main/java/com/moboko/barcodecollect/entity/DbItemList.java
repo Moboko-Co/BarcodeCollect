@@ -3,14 +3,32 @@ package com.moboko.barcodecollect.entity;
 public class DbItemList {
     int _id;
     String janCd;
+    String itemNm;
     String categoryCd;
     int Price;
     String taxDiv;
+    int salePer;
     int taxPrice;
     String memo1;
     String memo2;
     String deleteFlag;
+    String registerDay;
 
+    public String getItemNm() {
+        return itemNm;
+    }
+
+    public void setItemNm(String itemNm) {
+        this.itemNm = itemNm;
+    }
+
+    public int getSalePer() {
+        return salePer;
+    }
+
+    public void setSalePer(int salePer) {
+        this.salePer = salePer;
+    }
 
     public int getTaxPrice() {
         return taxPrice;
@@ -36,7 +54,7 @@ public class DbItemList {
         this.registerDay = registerDay;
     }
 
-    String registerDay;
+
 
 
     public String getJanCd() {

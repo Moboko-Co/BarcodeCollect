@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">BarcodeCollect</string>
     <string name="jan_cd">JANコード</string>
+    <string name="item_nm">商品名</string>
     <string name="back">戻る</string>
     <string name="category">カテゴリ</string>
     <string name="space" />

@@ -26,7 +26,9 @@ public class Consts {
     public static final String MONO_URI_HEAD = "https://mnrate.com/search?kwd=";
     public static final String MONO_URI_TAIL = "&i=all";
 
-    public static final String YAHOO_URL = "";
+    public static final String YAHOO_URL = "https://shopping.yahooapis.jp/ShoppingWebService/V1/json/itemSearch?appid=";
+    public static final String YAHOO_APP_ID = "dj00aiZpPVpCN1F6amtEM2lPOSZzPWNvbnN1bWVyc2VjcmV0Jng9Nzk-";
+    public static final String YAHOO_ADD_JAN_CODE = "&jan=";
 
     // データーベースのバージョン
     public static final int DATABASE_VERSION = 1;
@@ -45,9 +47,11 @@ public class Consts {
     public static final String PRICE = "price";
     public static final String TAX_DIV = "taxDiv";
     public static final String TAX_PRICE = "taxPrice";
+    public static final String SALE_PER = "salePer";
     public static final String MEMO1 = "memo1";
     public static final String MEMO2 = "memo2";
     public static final String DELETE_FLAG = "deleteFlag";
+    public static final String ITEM_NM = "itemNm";
 
     public static final int MODE_DEFAULT = 0;
     public static final int NORMAL_MODE = 1;
@@ -63,9 +67,11 @@ public class Consts {
             "CREATE TABLE IF NOT EXISTS " + ITEM_LIST_TABLE + " (" +
                     ID + " integer primary key autoincrement," +
                     JAN_CD + " TEXT," +
+                    ITEM_NM +  " TEXT," +
                     CATEGORY_CD + " TEXT," +
                     PRICE + " INTEGER," +
                     TAX_DIV + " TEXT," +
+                    SALE_PER + " INTEGER," +
                     TAX_PRICE + " INTEGER," +
                     MEMO1 + " TEXT," +
                     MEMO2 + " TEXT," +
@@ -85,19 +91,23 @@ public class Consts {
     public static final String SQL_DELETE_FAVORITE_LIST =
             "DROP TABLE IF EXISTS " + FAVORITE_LIST_TABLE;
     public static final String SELECT_LIST =
-            "SELECT a._id,a.janCd,a.categoryCd,a.price,a.taxDiv,a.taxPrice,a.memo1,a.memo2,a.registerDay,b.favoriteFlag"
+            "SELECT a._id,a.janCd,a.itemNm,a.categoryCd,a.price,a.taxDiv,a.salePer,a.taxPrice,a.memo1,a.memo2,a.registerDay,b.favoriteFlag"
                     + " FROM   itemList a,favoriteList b"
                     + " WHERE a._id = b._id";
 
     public static final String SELECT_MAX_LIST =
-            "SELECT max(a._id),a.janCd,a.categoryCd,a.price,a.taxDiv,a.taxPrice,a.memo1,a.memo2,a.registerDay,b.favoriteFlag"
-                    + " FROM   itemList a,favoriteList b"
+            "SELECT a._id,a.janCd,a.categoryCd,a.price,a.taxDiv,a.taxPrice,a.memo1,a.memo2,a.registerDay,b.favoriteFlag"
+                    + " FROM   (SELECT max(c._id) FROM itemList c) a,favoriteList b"
                     + " WHERE a._id = b._id";
 
     public static final String SELECT_COUNT_LIST =
             "SELECT count(a._id)"
                     + " FROM   itemList a,favoriteList b"
                     + " WHERE a._id = b._id";
+
+    public static final double TAX_PER_0 = 1.1;
+    public static final double TAX_PER_8 = 1.08;
+    public static final double TAX_PER_10 = 1.1;
 
     public static final String WHERE_DELETE_FLAG = " AND a.deleteFlag = '0'";
     public static final String WHERE_FAVORITE_FLAG = " AND b.favoriteFlag = ?";
@@ -116,6 +126,12 @@ public class Consts {
     public static final String CLIP_BOARD_TAX_1 = "税込";
     public static final String CLIP_BOARD_TAX_2 = "8%";
     public static final String CLIP_BOARD_TAX_3 = "10%";
+
+    public static final String NEW_ITEM_NM = "新規商品";
+    public static final String NEW_DIGIT = "0";
+
+    public static final String ALERT_YES = "はい";
+    public static final String ALERT_NO = "いいえ";
 
     public static final String[] SORT_TITLE = {
             "新しい順",

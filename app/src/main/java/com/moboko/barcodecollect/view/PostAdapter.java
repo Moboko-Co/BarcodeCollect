@@ -104,6 +104,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
             case "04":
                 holder.ivLabelImg.setBackgroundColor(res.getColor(R.color.category4_1));
                 break;
+            default:
+                break;
         }
 
         holder.llItemDetail.setOnClickListener(new View.OnClickListener() {

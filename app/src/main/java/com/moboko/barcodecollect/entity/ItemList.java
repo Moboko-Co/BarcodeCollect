@@ -4,9 +4,11 @@ public class ItemList {
     int _id;
     String registerDay;
     String janCd;
+    String itemNm;
     String categoryCd;
     int price;
     String taxDiv;
+    int salePer;
     int taxPrice;
     String memo1;
     String memo2;
@@ -99,5 +101,21 @@ public class ItemList {
 
     public void setFavoriteFlag(int favoriteFlag) {
         this.favoriteFlag = favoriteFlag;
+    }
+
+    public String getItemNm() {
+        return itemNm;
+    }
+
+    public void setItemNm(String itemNm) {
+        this.itemNm = itemNm;
+    }
+
+    public int getSalePer() {
+        return salePer;
+    }
+
+    public void setSalePer(int salePer) {
+        this.salePer = salePer;
     }
 }
