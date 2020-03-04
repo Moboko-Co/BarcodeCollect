@@ -63,11 +63,17 @@
             android:text="お気に入りのみ選択" />
     </RelativeLayout>
 
-    <ImageView
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/main_ad"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="#000000" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/ad_1">
+    </com.google.android.gms.ads.AdView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/item_rv"

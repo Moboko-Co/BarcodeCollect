@@ -24,6 +24,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.moboko.barcodecollect.db.DbOpenHelper;
 import com.moboko.barcodecollect.entity.DbFavoriteList;
 import com.moboko.barcodecollect.entity.ItemList;
@@ -48,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     CheckBox cbShowFavorite, cbAllSelect, cbOnlyFavorite;
     Spinner spSortItem;
     int currentSortOption = 0;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +71,16 @@ public class MainActivity extends AppCompatActivity {
         rlNormalOption = findViewById(R.id.rl_normal_option);
         rlEditOption = findViewById(R.id.rl_edit_option);
         btBack = findViewById(R.id.bt_back);
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mAdView = findViewById(R.id.main_ad);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         //初期表示
         rvListSet((RecyclerView) findViewById(R.id.item_rv), NORMAL_MODE);
@@ -141,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 String input = new String();
                 String separateCd = ",";
 
-                input = "JANコード,カテゴリ,お気に入り,金額,税率,計算後金額,メモ１,メモ２,登録日\n";
+                input = "JANコード,商品名,カテゴリ,お気に入り,金額,税率,計算後金額,メモ１,メモ２,登録日\n";
 
                 for (int i = 0; i < count; i++) {
 
@@ -150,6 +166,8 @@ public class MainActivity extends AppCompatActivity {
                     _idPrms[0] = String.valueOf(mSelectList.get(i));
                     List<ItemList> list = selectId(selectCopyData, _idPrms).getData(MODE_DEFAULT);
                     input = input + list.get(0).getJanCd();
+                    input = input + separateCd;
+                    input = input + list.get(0).getItemNm();
                     input = input + separateCd;
                     input = input + list.get(0).getCategoryCd();
                     input = input + separateCd;

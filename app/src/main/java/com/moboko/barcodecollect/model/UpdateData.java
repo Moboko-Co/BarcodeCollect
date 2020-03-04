@@ -10,10 +10,12 @@ import com.moboko.barcodecollect.entity.DbItemList;
 import static com.moboko.barcodecollect.util.Consts.CATEGORY_CD;
 import static com.moboko.barcodecollect.util.Consts.FAVORITE_FLAG;
 import static com.moboko.barcodecollect.util.Consts.ID;
+import static com.moboko.barcodecollect.util.Consts.ITEM_NM;
 import static com.moboko.barcodecollect.util.Consts.MEMO1;
 import static com.moboko.barcodecollect.util.Consts.MEMO2;
 import static com.moboko.barcodecollect.util.Consts.PRICE;
 import static com.moboko.barcodecollect.util.Consts.REGISTER_DAY;
+import static com.moboko.barcodecollect.util.Consts.SALE_PER;
 import static com.moboko.barcodecollect.util.Consts.TAX_DIV;
 import static com.moboko.barcodecollect.util.Consts.TAX_PRICE;
 
@@ -39,9 +41,11 @@ public class UpdateData {
 
     public boolean updateDbItemList(String prm[]) {
         String sql = "update itemList set "
+                + ITEM_NM  + " = '" + dbItemList.getItemNm() + "',"
                 + CATEGORY_CD  + " = '" + dbItemList.getCategoryCd() + "',"
                 + PRICE  + " = " + dbItemList.getPrice() + ","
                 + TAX_DIV  + " = '" + dbItemList.getTaxDiv() + "',"
+                + SALE_PER + " = " + dbItemList.getSalePer() + ","
                 + TAX_PRICE + " = " + dbItemList.getTaxPrice() + ","
                 + MEMO1  + " = '" + dbItemList.getMemo1() + "',"
                 + MEMO2  + " = '" + dbItemList.getMemo2() + "',"

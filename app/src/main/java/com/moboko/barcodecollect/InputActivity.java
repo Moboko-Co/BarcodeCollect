@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -21,7 +20,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.zxing.common.StringUtils;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.moboko.barcodecollect.db.DbOpenHelper;
 import com.moboko.barcodecollect.entity.DbFavoriteList;
 import com.moboko.barcodecollect.entity.DbItemList;
@@ -31,21 +34,11 @@ import com.moboko.barcodecollect.model.SelectData;
 import com.moboko.barcodecollect.model.UpdateData;
 import com.moboko.barcodecollect.util.Checks;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 import static com.moboko.barcodecollect.util.Consts.*;
 
@@ -57,7 +50,8 @@ public class InputActivity extends AppCompatActivity {
     String[] req_id = new String[1];
 
     String idProc;
-    String outItemNm;
+
+    FetchPostTasks fetchPostsTask;
 
     List<ItemList> itemList = new ArrayList<>();
 
@@ -71,6 +65,7 @@ public class InputActivity extends AppCompatActivity {
     Button btContinue;
     String url;
 
+    private AdView mAdView;
 
     InputMethodManager inputMethodManager;
     private RelativeLayout llInput;
@@ -78,6 +73,18 @@ public class InputActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
+        fetchPostsTask = new FetchPostTasks();
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mAdView = findViewById(R.id.input_ad);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
 
         inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         llInput = findViewById(R.id.ll_input);
@@ -142,19 +149,13 @@ public class InputActivity extends AppCompatActivity {
                         })
                         .setNegativeButton(ALERT_NO, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                setNewValue();
+                                execFetch();
                             }
                         })
                         .show();
 
             } else {
-                url = YAHOO_URL + YAHOO_APP_ID + YAHOO_ADD_JAN_CODE + reqJanCd[0];
-                Response res = getItemResults(url);
-                outItemNm = getItemNmResponse(res);
-                if (outItemNm == null || outItemNm.isEmpty()) {
-                    outItemNm = NEW_ITEM_NM;
-                }
-                setNewValue();
+                execFetch();
             }
         } else if (idProc.equals(UPDATE_FLAG)) {
             req_id[0] = fromIntent.getStringExtra(UPDATE_PROC);
@@ -168,6 +169,24 @@ public class InputActivity extends AppCompatActivity {
             setUpdateValue();
         }
         evInputPrice.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                setPrice((RadioButton) findViewById(rgTax.getCheckedRadioButtonId()), getPer(String.valueOf(evInputPer.getText())));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String per = String.valueOf(evInputPer.getText());
+                setPrice((RadioButton) findViewById(rgTax.getCheckedRadioButtonId()), getPer(String.valueOf(evInputPer.getText())));
+            }
+        });
+
+        evInputPer.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -222,6 +241,18 @@ public class InputActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        fetchPostsTask.setOnCallBack(new FetchPostTasks.CallBackTask() {
+
+            @Override
+            public void CallBack(String result) {
+                super.CallBack(result);
+                setNewValue(fetchPostsTask.resItemNm);
+                //fetchPostsTask.resItemNm;
+            }
+        });
+
+
     }
 
     private String setPrice(RadioButton rbTax, int evPer) {
@@ -240,20 +271,16 @@ public class InputActivity extends AppCompatActivity {
             case R.id.rb_t_1:
                 priceStr = getCalcPrice(TAX_PER_0, evPer, inputPrice);
                 tvOutputPrice.setText(priceStr);
-                tvOutputPrice.setVisibility(View.INVISIBLE);
                 return "1";
             case R.id.rb_t_2:
-                tvOutputPrice.setVisibility(View.VISIBLE);
                 priceStr = getCalcPrice(TAX_PER_8, evPer, inputPrice);
                 tvOutputPrice.setText(priceStr);
                 return "2";
             case R.id.rb_t_3:
-                tvOutputPrice.setVisibility(View.VISIBLE);
                 priceStr = getCalcPrice(TAX_PER_10, evPer, inputPrice);
                 tvOutputPrice.setText(priceStr);
                 return "3";
             default:
-                tvOutputPrice.setVisibility(View.INVISIBLE);
                 return "1";
         }
     }
@@ -324,26 +351,22 @@ public class InputActivity extends AppCompatActivity {
         evInputMemo2.setText(itemList.get(0).getMemo2());
         tvInputJanCd.setText(itemList.get(0).getJanCd());
         tvInputRegisterDay.setText(itemList.get(0).getRegisterDay());
-        evInputPer.setText(itemList.get(0).getSalePer());
-        evInputPrice.setText(String.valueOf(itemList.get(0).getPrice()));
-
-        String priceStr = String.format("%,d", itemList.get(0).getTaxPrice());
         // ラジオボタン
         switch (itemList.get(0).getTaxDiv()) {
             case "1":
                 rgTax.check(R.id.rb_t_1);
                 break;
             case "2":
-                tvOutputPrice.setVisibility(View.VISIBLE);
-                tvOutputPrice.setText(priceStr);
                 rgTax.check(R.id.rb_t_2);
                 break;
             case "3":
-                tvOutputPrice.setVisibility(View.VISIBLE);
-                tvOutputPrice.setText(priceStr);
                 rgTax.check(R.id.rb_t_3);
                 break;
         }
+
+        evInputPrice.setText(String.valueOf(itemList.get(0).getPrice()));
+        evInputPer.setText(String.valueOf(itemList.get(0).getSalePer()));
+
         // カテゴリー
         switch (itemList.get(0).getCategoryCd()) {
             case "01":
@@ -359,14 +382,16 @@ public class InputActivity extends AppCompatActivity {
                 rgCategory.check(R.id.rb_c_4);
                 break;
         }
+
+        setPrice((RadioButton) findViewById(rgTax.getCheckedRadioButtonId()), getPer(String.valueOf(evInputPer.getText())));
     }
 
-    private void setNewValue() {
+    private void setNewValue(String itemNm) {
         tvInputJanCd.setText(reqJanCd[0]);
         rgTax.check(R.id.rb_t_1);
         rgCategory.check(R.id.rb_c_1);
         evInputPer.setText(NEW_DIGIT);
-        evInputItemNm.setText(outItemNm);
+        evInputItemNm.setText(itemNm);
     }
 
     // 画面タップ時の処理
@@ -392,40 +417,13 @@ public class InputActivity extends AppCompatActivity {
     }
 
     String getCalcPrice(double tax, int per, int input) {
-        return String.format("%,d", (int) Math.floor(input * tax) * ((100 - per) / 100));
+        int calc = (int) Math.floor(input * tax);
+        calc = (int) Math.floor(calc * (100 - per) / 100);
+        return String.format("%,d", calc);
     }
 
-    private Response getItemResults(String url) {
-        OkHttpClient client = new OkHttpClient();
-
-        Request builder = new Request.Builder()
-                .url(url)
-                .build();
-        try {
-            Response response = client.newCall(builder).execute();
-            return response;
-        } catch (IOException e) {
-            Log.d("SEARCHITEM : HTTP", e.getMessage());
-            return null;
-        }
-    }
-
-    private String getItemNmResponse(Response response) {
-        String data = new String();
-        String str = new String();
-        try {
-            data = response.body().string();
-            JSONObject rootObject = new JSONObject(data);
-            JSONObject resultSetObject = rootObject.getJSONObject("ResultSet");
-            JSONObject result0Object = resultSetObject.getJSONObject("0");
-            JSONObject resultObject = result0Object.getJSONObject("Result");
-            JSONObject itemObject = resultObject.getJSONObject("0");
-            str = itemObject.getString("Name");
-        } catch (JSONException | IOException e) {
-            e.printStackTrace();
-            Log.d("SEARCHITEM : TOJSON", e.getMessage());
-            return null;
-        }
-        return str;
+    void execFetch() {
+        url = YAHOO_URL + YAHOO_APP_ID + YAHOO_ADD_JAN_CODE + reqJanCd[0];
+        fetchPostsTask.execute(url);
     }
 }

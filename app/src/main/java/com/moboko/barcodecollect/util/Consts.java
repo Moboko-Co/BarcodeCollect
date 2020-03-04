@@ -31,7 +31,7 @@ public class Consts {
     public static final String YAHOO_ADD_JAN_CODE = "&jan=";
 
     // データーベースのバージョン
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
 
     // データーベース名
     public static final String DATABASE_NAME = "itemList.db";
@@ -105,7 +105,7 @@ public class Consts {
                     + " FROM   itemList a,favoriteList b"
                     + " WHERE a._id = b._id";
 
-    public static final double TAX_PER_0 = 1.1;
+    public static final double TAX_PER_0 = 1;
     public static final double TAX_PER_8 = 1.08;
     public static final double TAX_PER_10 = 1.1;
 

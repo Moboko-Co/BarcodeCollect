@@ -32,9 +32,11 @@ public class InsertData {
     public boolean insertDbItemList() {
         String sql = "insert into itemList ("
                 + JAN_CD + ","
+                + ITEM_NM + ","
                 + CATEGORY_CD + ","
                 + PRICE + ","
                 + TAX_DIV + ","
+                + SALE_PER + ","
                 + TAX_PRICE + ","
                 + MEMO1 + ","
                 + MEMO2 + ","
@@ -42,9 +44,11 @@ public class InsertData {
                 + REGISTER_DAY
                 + ") values ('"
                 + dbItemList.getJanCd() + "', '"
+                + dbItemList.getItemNm() + "', '"
                 + dbItemList.getCategoryCd() + "', "
                 + dbItemList.getPrice() + ", '"
                 + dbItemList.getTaxDiv() + "', "
+                + dbItemList.getSalePer() + ", "
                 + dbItemList.getTaxPrice() + ", '"
                 + dbItemList.getMemo1() + "', '"
                 + dbItemList.getMemo2() + "', '"

@@ -31,4 +31,5 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
     implementation("com.squareup.okhttp3:okhttp:3.12.0")
+    implementation 'com.google.android.gms:play-services-ads:19.0.0'
 }

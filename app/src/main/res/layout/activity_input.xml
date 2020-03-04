@@ -24,14 +24,16 @@
             android:background="@null"
             android:text="@string/back" />
     </RelativeLayout>
-
-
-    <ImageView
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/input_ad"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
         android:layout_below="@id/rl_edit_option"
-        android:background="#000000" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/ad_2">
+    </com.google.android.gms.ads.AdView>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -144,8 +146,7 @@
                             android:layout_alignParentLeft="true"
                             android:hint="@string/_0"
                             android:inputType="phone"
-                            android:nextFocusDown="@id/ev_input_per"
-                            android:text="@string/_0" />
+                            android:nextFocusDown="@id/ev_input_per"/>
                         <TextView
                             android:id="@+id/tv_yen_text"
                             android:layout_width="wrap_content"
@@ -242,9 +243,7 @@
                         android:id="@+id/tv_output_price"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:gravity="center|left"
-                        android:text="@string/_000000000"
-                        android:visibility="invisible" />
+                        android:gravity="center|left"/>
 
                         <TextView
                             android:id="@+id/tv_yen_text2"

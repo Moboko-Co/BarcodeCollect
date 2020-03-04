@@ -26,4 +26,7 @@
     <string name="tax">税率</string>
     <string name="yen">円</string>
     <string name="_000000000">000000000</string>
+
+    <string name="ad_1">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="ad_2">ca-app-pub-3940256099942544/6300978111</string>
 </resources>
