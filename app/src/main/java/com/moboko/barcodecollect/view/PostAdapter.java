@@ -76,7 +76,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
                 holder.cbSelect.setChecked(true);
             }
         }
-        holder.tvItemMemo1.setText(item.getMemo1());
+        holder.tvItemMemo1.setText(item.getItemNm());
         holder.bJanCd.setText(item.getJanCd());
 
         switch (item.getFavoriteFlag()) {

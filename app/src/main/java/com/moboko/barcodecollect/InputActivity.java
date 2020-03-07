@@ -269,15 +269,15 @@ public class InputActivity extends AppCompatActivity {
         String priceStr = new String();
         switch (rbTax.getId()) {
             case R.id.rb_t_1:
-                priceStr = getCalcPrice(TAX_PER_0, evPer, inputPrice);
+                priceStr = String.format("%,d", getCalcPrice(TAX_PER_0, evPer, inputPrice));
                 tvOutputPrice.setText(priceStr);
                 return "1";
             case R.id.rb_t_2:
-                priceStr = getCalcPrice(TAX_PER_8, evPer, inputPrice);
+                priceStr = String.format("%,d", getCalcPrice(TAX_PER_8, evPer, inputPrice));
                 tvOutputPrice.setText(priceStr);
                 return "2";
             case R.id.rb_t_3:
-                priceStr = getCalcPrice(TAX_PER_10, evPer, inputPrice);
+                priceStr = String.format("%,d", getCalcPrice(TAX_PER_10, evPer, inputPrice));
                 tvOutputPrice.setText(priceStr);
                 return "3";
             default:
@@ -313,13 +313,13 @@ public class InputActivity extends AppCompatActivity {
 
         switch (inputItem.getTaxDiv()) {
             case "1":
-                inputItem.setTaxPrice(Integer.parseInt(getCalcPrice(TAX_PER_0, per, inputItem.getPrice())));
+                inputItem.setTaxPrice(getCalcPrice(TAX_PER_0, per, inputItem.getPrice()));
                 break;
             case "2":
-                inputItem.setTaxPrice(Integer.parseInt(getCalcPrice(TAX_PER_8, per, inputItem.getPrice())));
+                inputItem.setTaxPrice(getCalcPrice(TAX_PER_8, per, inputItem.getPrice()));
                 break;
             case "3":
-                inputItem.setTaxPrice(Integer.parseInt(getCalcPrice(TAX_PER_10, per, inputItem.getPrice())));
+                inputItem.setTaxPrice(getCalcPrice(TAX_PER_10, per, inputItem.getPrice()));
                 break;
         }
         inputItem.setMemo1(String.valueOf(evInputMemo1.getText()));
@@ -416,10 +416,10 @@ public class InputActivity extends AppCompatActivity {
         return Integer.parseInt(per);
     }
 
-    String getCalcPrice(double tax, int per, int input) {
+    int getCalcPrice(double tax, int per, int input) {
         int calc = (int) Math.floor(input * tax);
         calc = (int) Math.floor(calc * (100 - per) / 100);
-        return String.format("%,d", calc);
+        return calc;
     }
 
     void execFetch() {

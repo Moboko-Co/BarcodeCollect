@@ -183,7 +183,7 @@ public class Consts {
             + " SELECT "
             + ID + ","
             + JAN_CD + ","
-            + "新規商品" + ","
+            + "'新規商品'" + ","
             + CATEGORY_CD + ","
             + PRICE + ","
             + TAX_DIV + ","
