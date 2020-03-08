@@ -90,19 +90,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
         String priceStr = "¥" + String.format("%,d", item.getTaxPrice());
         holder.tvItemPrice.setText(priceStr);
 
-        Resources res = mContext.getResources();
         switch (item.getCategoryCd()) {
             case "01":
-                holder.ivLabelImg.setBackgroundColor(res.getColor(R.color.category1_1));
+                holder.ivLabelImg.setBackgroundResource(R.drawable.category_1_corner_left);
                 break;
             case "02":
-                holder.ivLabelImg.setBackgroundColor(res.getColor(R.color.category2_1));
+                holder.ivLabelImg.setBackgroundResource(R.drawable.category_2_corner_left);
                 break;
             case "03":
-                holder.ivLabelImg.setBackgroundColor(res.getColor(R.color.category3_1));
+                holder.ivLabelImg.setBackgroundResource(R.drawable.category_3_corner_left);
                 break;
             case "04":
-                holder.ivLabelImg.setBackgroundColor(res.getColor(R.color.category4_1));
+                holder.ivLabelImg.setBackgroundResource(R.drawable.category_4_corner_left);
                 break;
             default:
                 break;

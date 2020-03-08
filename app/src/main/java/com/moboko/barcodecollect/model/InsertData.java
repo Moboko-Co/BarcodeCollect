@@ -39,7 +39,6 @@ public class InsertData {
                 + SALE_PER + ","
                 + TAX_PRICE + ","
                 + MEMO1 + ","
-                + MEMO2 + ","
                 + DELETE_FLAG + ","
                 + REGISTER_DAY
                 + ") values ('"
@@ -51,7 +50,6 @@ public class InsertData {
                 + dbItemList.getSalePer() + ", "
                 + dbItemList.getTaxPrice() + ", '"
                 + dbItemList.getMemo1() + "', '"
-                + dbItemList.getMemo2() + "', '"
                 + dbItemList.getDeleteFlag() + "', '"
                 + dbItemList.getRegisterDay() + "');";
         db.execSQL(sql);

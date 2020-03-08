@@ -1,45 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ll_input"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/allBack"
     android:focusableInTouchMode="true">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool_bar_input"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentTop="true"/>
 
 
     <RelativeLayout
         android:id="@+id/rl_edit_option"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:background="@color/topBack"
-        android:gravity="top"
-        android:padding="5dp">
+        style="@style/app_top"
+        android:layout_below="@id/tool_bar_input"
+        >
 
         <Button
             android:id="@+id/bt_back"
-            android:layout_width="70dp"
-            android:layout_height="match_parent"
+            style="@style/app_top_item"
             android:layout_alignParentStart="true"
             android:background="@null"
             android:text="@string/back" />
     </RelativeLayout>
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/input_ad"
-        android:layout_below="@id/rl_edit_option"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        ads:adSize="SMART_BANNER"
-        ads:adUnitId="@string/ad_2">
-    </com.google.android.gms.ads.AdView>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/input_ad"
-        android:background="@color/allBack"
+        android:layout_below="@id/rl_edit_option"
         android:fillViewport="true">
 
         <LinearLayout
@@ -103,25 +96,25 @@
                             android:id="@+id/rb_c_1"
                             style="@style/category_radio"
                             android:background="@drawable/rb_c_s_1"
-                            android:text="@string/space" />
+                            android:text="@string/category_1" />
 
                         <RadioButton
                             android:id="@+id/rb_c_2"
                             style="@style/category_radio"
                             android:background="@drawable/rb_c_s_2"
-                            android:text="@string/space" />
+                            android:text="@string/category_2" />
 
                         <RadioButton
                             android:id="@+id/rb_c_3"
                             style="@style/category_radio"
                             android:background="@drawable/rb_c_s_3"
-                            android:text="@string/space" />
+                            android:text="@string/category_3" />
 
                         <RadioButton
                             android:id="@+id/rb_c_4"
                             style="@style/category_radio"
                             android:background="@drawable/rb_c_s_4"
-                            android:text="@string/space" />
+                            android:text="@string/category_4" />
 
                     </RadioGroup>
 
@@ -146,21 +139,17 @@
                             android:layout_alignParentLeft="true"
                             android:hint="@string/_0"
                             android:inputType="phone"
-                            android:nextFocusDown="@id/ev_input_per"/>
+                            android:nextFocusDown="@id/ev_input_per"><requestFocus/></EditText>>
                         <TextView
                             android:id="@+id/tv_yen_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
+                            style="@style/const_text"
                             android:layout_toRightOf="@+id/ev_input_price"
-                            android:gravity="center"
                             android:text="@string/yen" />
 
                         <TextView
                             android:id="@+id/tv_sale_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
+                            style="@style/const_text"
                             android:layout_toLeftOf="@+id/ev_input_per"
-                            android:gravity="center"
                             android:text="@string/sale" />
 
                         <EditText
@@ -175,10 +164,8 @@
 
                         <TextView
                             android:id="@+id/tv_sale_per"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
+                            style="@style/const_text"
                             android:layout_alignParentRight="true"
-                            android:gravity="center"
                             android:text="%" />
 
                     </RelativeLayout>
@@ -241,16 +228,15 @@
                         style="@style/detail_right_small">
                     <TextView
                         android:id="@+id/tv_output_price"
+                        android:textColor="@color/fontDetailLeft"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center|left"/>
 
                         <TextView
                             android:id="@+id/tv_yen_text2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
+                            style="@style/const_text"
                             android:layout_toRightOf="@+id/tv_output_price"
-                            android:gravity="center"
                             android:text="@string/yen" />
                     </RelativeLayout>
 
@@ -272,30 +258,13 @@
                         android:id="@+id/ev_input_memo1"
                         style="@style/detail_edit_text"
                         android:layout_width="match_parent"
-                        android:inputType="text"
-                        android:nextFocusDown="@id/ev_input_memo2" />
+                        android:inputType="text"/>
                 </LinearLayout>
             </LinearLayout>
 
             <View style="@style/separate_line" />
 
-            <LinearLayout style="@style/detail_small">
 
-                <TextView
-                    android:id="@+id/tv_input_memo2"
-                    style="@style/detail_left_small"
-                    android:text="@string/memo_2" />
-
-                <LinearLayout style="@style/detail_right_small">
-
-                    <EditText
-                        android:id="@+id/ev_input_memo2"
-                        style="@style/detail_edit_text"
-                        android:layout_width="match_parent"
-                        android:inputType="text" />
-                </LinearLayout>
-
-            </LinearLayout>
 
             <View style="@style/separate_line" />
 
@@ -311,13 +280,22 @@
                     style="@style/detail_right_small" />
 
             </LinearLayout>
-
+            <com.google.android.gms.ads.AdView
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/input_ad"
+                android:layout_below="@id/rl_edit_option"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                ads:adSize="SMART_BANNER"
+                ads:adUnitId="@string/ad_2">
+            </com.google.android.gms.ads.AdView>
 
             <LinearLayout
                 android:id="@+id/ll_button_group"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/allBack"
+                android:background="@color/colorDetail"
                 android:gravity="bottom"
                 android:orientation="horizontal">
 

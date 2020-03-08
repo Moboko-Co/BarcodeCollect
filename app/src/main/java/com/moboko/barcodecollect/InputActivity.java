@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -58,7 +60,7 @@ public class InputActivity extends AppCompatActivity {
     private DbOpenHelper helper;
     private SQLiteDatabase db;
 
-    EditText evInputPrice, evInputMemo1, evInputMemo2, evInputItemNm, evInputPer;
+    EditText evInputPrice, evInputMemo1, evInputItemNm, evInputPer;
     TextView tvInputJanCd, tvInputRegisterDay, tvOutputPrice;
     RadioGroup rgTax, rgCategory;
     String sql;
@@ -81,6 +83,11 @@ public class InputActivity extends AppCompatActivity {
             }
         });
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar_input);
+        setSupportActionBar(toolbar);
+        toolbar.setLogo(R.mipmap.ic_launcher_round);
+
+
         mAdView = findViewById(R.id.input_ad);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -96,14 +103,12 @@ public class InputActivity extends AppCompatActivity {
         rgTax = findViewById(R.id.rg_tax);
         rgCategory = findViewById(R.id.rg_category);
         evInputMemo1 = findViewById(R.id.ev_input_memo1);
-        evInputMemo2 = findViewById(R.id.ev_input_memo2);
         tvInputJanCd = findViewById(R.id.tv_input_jan_cd);
         tvInputRegisterDay = findViewById(R.id.tv_input_register_day);
         evInputPrice = findViewById(R.id.ev_input_price);
         tvOutputPrice = findViewById(R.id.tv_output_price);
         evInputItemNm = findViewById(R.id.ev_input_item_nm);
         evInputPer = findViewById(R.id.ev_input_per);
-
 
         //DB セットアップ
         if (helper == null) {
@@ -168,6 +173,24 @@ public class InputActivity extends AppCompatActivity {
 
             setUpdateValue();
         }
+
+        evInputMemo1.setOnKeyListener(new View.OnKeyListener() {
+
+            //コールバックとしてonKey()メソッドを定義
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //イベントを取得するタイミングには、ボタンが押されてなおかつエンターキーだったときを指定
+                if((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)){
+                    //キーボードを閉じる
+                    inputMethodManager.hideSoftInputFromWindow(evInputMemo1.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
+
+                    return true;
+                }
+
+                return false;
+            }
+        });
+
         evInputPrice.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -247,7 +270,10 @@ public class InputActivity extends AppCompatActivity {
             @Override
             public void CallBack(String result) {
                 super.CallBack(result);
-                setNewValue(fetchPostsTask.resItemNm);
+                if(fetchPostsTask.resItemNm.isEmpty() || fetchPostsTask.resItemNm == null){
+                    setNewValue(NEW_ITEM_NM);
+                }
+                else setNewValue(fetchPostsTask.resItemNm);
                 //fetchPostsTask.resItemNm;
             }
         });
@@ -323,7 +349,6 @@ public class InputActivity extends AppCompatActivity {
                 break;
         }
         inputItem.setMemo1(String.valueOf(evInputMemo1.getText()));
-        inputItem.setMemo2(String.valueOf(evInputMemo2.getText()));
         inputItem.setJanCd(reqJanCd[0]);
         inputItem.setRegisterDay(timeStamp);
         inputItem.setDeleteFlag("0");
@@ -348,7 +373,6 @@ public class InputActivity extends AppCompatActivity {
     private void setUpdateValue() {
         evInputItemNm.setText(itemList.get(0).getItemNm());
         evInputMemo1.setText(itemList.get(0).getMemo1());
-        evInputMemo2.setText(itemList.get(0).getMemo2());
         tvInputJanCd.setText(itemList.get(0).getJanCd());
         tvInputRegisterDay.setText(itemList.get(0).getRegisterDay());
         // ラジオボタン
@@ -366,7 +390,6 @@ public class InputActivity extends AppCompatActivity {
 
         evInputPrice.setText(String.valueOf(itemList.get(0).getPrice()));
         evInputPer.setText(String.valueOf(itemList.get(0).getSalePer()));
-
         // カテゴリー
         switch (itemList.get(0).getCategoryCd()) {
             case "01":

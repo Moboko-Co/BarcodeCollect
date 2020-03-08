@@ -4,7 +4,13 @@
     <item android:state_checked="true">
         <shape android:shape="rectangle">
             <!-- 背景色 -->
-            <solid android:color="@color/category3_1" />
+            <solid android:color="@color/category3" />
+            <corners
+                android:topRightRadius="35dp"
+                android:bottomRightRadius="35dp"
+                android:bottomLeftRadius="35dp"
+                android:topLeftRadius="35dp"
+                />
         </shape>
     </item>
 
@@ -12,11 +18,7 @@
     <item android:state_checked="false">
         <shape android:shape="rectangle">
             <!-- 背景色 -->
-            <solid android:color="@color/category3" />
-            <!-- 枠色 -->
-            <stroke
-                android:width="2dp"
-                android:color="@color/category3_1" />
+            <solid android:color="@color/colorDetail" />
         </shape>
     </item>
 </selector>

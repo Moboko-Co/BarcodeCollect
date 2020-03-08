@@ -18,7 +18,7 @@
     <item android:state_checked="false">
         <shape android:shape="rectangle">
             <!-- 背景色 -->
-            <solid android:color="@color/whiteDetail" />
+            <solid android:color="@color/colorDetail" />
         </shape>
     </item>
 </selector>

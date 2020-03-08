@@ -7,17 +7,7 @@ import com.moboko.barcodecollect.db.DbOpenHelper;
 import com.moboko.barcodecollect.entity.DbFavoriteList;
 import com.moboko.barcodecollect.entity.DbItemList;
 
-import static com.moboko.barcodecollect.util.Consts.CATEGORY_CD;
-import static com.moboko.barcodecollect.util.Consts.FAVORITE_FLAG;
-import static com.moboko.barcodecollect.util.Consts.ID;
-import static com.moboko.barcodecollect.util.Consts.ITEM_NM;
-import static com.moboko.barcodecollect.util.Consts.MEMO1;
-import static com.moboko.barcodecollect.util.Consts.MEMO2;
-import static com.moboko.barcodecollect.util.Consts.PRICE;
-import static com.moboko.barcodecollect.util.Consts.REGISTER_DAY;
-import static com.moboko.barcodecollect.util.Consts.SALE_PER;
-import static com.moboko.barcodecollect.util.Consts.TAX_DIV;
-import static com.moboko.barcodecollect.util.Consts.TAX_PRICE;
+import static com.moboko.barcodecollect.util.Consts.*;
 
 public class UpdateData {
     private DbOpenHelper helper;
@@ -48,7 +38,6 @@ public class UpdateData {
                 + SALE_PER + " = " + dbItemList.getSalePer() + ","
                 + TAX_PRICE + " = " + dbItemList.getTaxPrice() + ","
                 + MEMO1  + " = '" + dbItemList.getMemo1() + "',"
-                + MEMO2  + " = '" + dbItemList.getMemo2() + "',"
                 + REGISTER_DAY  + " = '" + dbItemList.getRegisterDay() + "' "
                 + "where " + ID + " = ?";
         Cursor cursor = db.rawQuery(sql, prm);

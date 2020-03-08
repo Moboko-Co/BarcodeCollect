@@ -1,16 +1,35 @@
 <resources>
     <string name="app_name">BarcodeCollect</string>
+    <string name="tax">税率</string>
+    <string name="yen">円</string>
+    <string name="_000000000">000000000</string>
+
+    <string name="ad_1">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="ad_2">ca-app-pub-3940256099942544/6300978111</string>
+
+
+    <!--フォントサイズ -->
+    <string name="detail_title_size">15sp</string>
+    <string name="et_text_size">13sp</string>
+
+
+    <!--画面表示文言固定値-->
+    <string name="like_only">お気に入り</string>
+
     <string name="jan_cd">JANコード</string>
     <string name="item_nm">商品名</string>
     <string name="back">戻る</string>
     <string name="category">カテゴリ</string>
     <string name="space" />
     <string name="price">金額</string>
+    <string name="category_1">A</string>
+    <string name="category_2">B</string>
+    <string name="category_3">C</string>
+    <string name="category_4">D</string>
     <string name="tax_1">税込</string>
     <string name="tax_2">8%</string>
     <string name="tax_3">10%</string>
-    <string name="memo_1">メモ１</string>
-    <string name="memo_2">メモ２</string>
+    <string name="memo_1">メモ</string>
     <string name="register_day">登録日</string>
     <string name="continue_regist">続けて登録</string>
     <string name="finish">完了</string>
@@ -21,12 +40,6 @@
     <string name="select">選択</string>
     <string name="calc_result">計算結果</string>
     <string name="sale">割引</string>
+    <string name="all_select">全て選択</string>
 
-    <string name="et_text_size">13sp</string>
-    <string name="tax">税率</string>
-    <string name="yen">円</string>
-    <string name="_000000000">000000000</string>
-
-    <string name="ad_1">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="ad_2">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

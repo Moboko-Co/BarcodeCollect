@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -70,6 +71,11 @@ public class MainActivity extends AppCompatActivity {
         rlNormalOption = findViewById(R.id.rl_normal_option);
         rlEditOption = findViewById(R.id.rl_edit_option);
         btBack = findViewById(R.id.bt_back);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar_main);
+        toolbar.setLogo(R.drawable.action_header);
+        setSupportActionBar(toolbar);
+
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -194,8 +200,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                     input = input + separateCd;
                     input = input + list.get(0).getMemo1();
-                    input = input + separateCd;
-                    input = input + list.get(0).getMemo2();
                     input = input + separateCd;
                     input = input + list.get(0).getRegisterDay();
                     if (i != count - 1) {

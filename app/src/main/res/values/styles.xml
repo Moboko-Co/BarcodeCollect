@@ -1,11 +1,22 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@color/windowsBackground</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="app_top">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@color/colorDetail</item>
+    </style>
+
+    <style name="app_top_item">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
     </style>
 
     <style name="detail_small">
@@ -31,7 +42,7 @@
         <item name="android:layout_height">55dp</item>
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginRight">5dp</item>
-        <item name="android:background">@color/whiteDetail</item>
+        <item name="android:background">@color/colorDetail</item>
     </style>
     <style name="detail_big_bottom">
         <item name="android:orientation">horizontal</item>
@@ -46,9 +57,10 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_marginLeft">5dp</item>
-        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
         <item name="android:gravity">left|center</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/fontDetailLeft</item>
     </style>
 
     <style name="detail_right_small">
@@ -57,7 +69,9 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginRight">5dp</item>
-        <item name="android:gravity">left|center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/fontDetailRight</item>
     </style>
 
     <style name="detail_edit_text">
@@ -68,7 +82,8 @@
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginRight">5dp</item>
         <item name="android:gravity">left|bottom</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/fontDetailRight</item>
     </style>
 
     <style name="detail_separate_line">
@@ -76,14 +91,12 @@
         <item name="android:layout_height">1dp</item>
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginRight">5dp</item>
-        <item name="android:background">@color/whiteDetail</item>
     </style>
 
     <style name="separate_left_line">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">1dp</item>
-        <item name="android:background">@color/whiteDetail</item>
     </style>
     <style name="separate_right_line">
         <item name="android:layout_width">0dp</item>
@@ -91,7 +104,7 @@
         <item name="android:layout_height">1dp</item>
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
-        <item name="android:background">@color/allBack</item>
+        <item name="android:background">@color/windowsBackground</item>
     </style>
 
     <style name="separate_line">
@@ -99,7 +112,7 @@
         <item name="android:layout_height">1dp</item>
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
-        <item name="android:background">@color/allBack</item>
+        <item name="android:background">@color/windowsBackground</item>
     </style>
 
     <style name="category_radio">
@@ -111,6 +124,8 @@
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:layout_marginBottom">10dp</item>
         <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@drawable/rb_t_t_all</item>
     </style>
 
     <style name="tax_radio">
@@ -124,6 +139,14 @@
         <item name="android:button">@null</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@drawable/rb_t_t_all</item>
+    </style>
+
+    <style name="const_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/fontDetailRight</item>
     </style>
 
 </resources>

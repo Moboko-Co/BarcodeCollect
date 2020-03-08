@@ -28,6 +28,6 @@ public class SplashActivity extends Activity {
                 // SplashActivityを終了する
                 SplashActivity.this.finish();
             }
-        }, 2 * 1000); // 2000ミリ秒後（2秒後）に実行
+        }, 1000); // 1500ミリ秒後（1.5秒後）に実行
     }
 }

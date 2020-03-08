@@ -10,7 +10,6 @@ public class DbItemList {
     int salePer;
     int taxPrice;
     String memo1;
-    String memo2;
     String deleteFlag;
     String registerDay;
 
@@ -95,14 +94,6 @@ public class DbItemList {
 
     public void setMemo1(String memo1) {
         this.memo1 = memo1;
-    }
-
-    public String getMemo2() {
-        return memo2;
-    }
-
-    public void setMemo2(String memo2) {
-        this.memo2 = memo2;
     }
 
     public String getDeleteFlag() {

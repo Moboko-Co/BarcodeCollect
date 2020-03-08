@@ -45,9 +45,8 @@ public class SelectData {
             sqlRes.setSalePer(cursor.getInt(6));
             sqlRes.setTaxPrice(cursor.getInt(7));
             sqlRes.setMemo1(cursor.getString(8));
-            sqlRes.setMemo2(cursor.getString(9));
-            sqlRes.setRegisterDay(cursor.getString(10));
-            sqlRes.setFavoriteFlag(cursor.getInt(11));
+            sqlRes.setRegisterDay(cursor.getString(9));
+            sqlRes.setFavoriteFlag(cursor.getInt(10));
 
             if(mode == OPTION_ALL_SELECT) {
                 sqlRes.setCbSelected(true);

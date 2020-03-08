@@ -6,24 +6,24 @@
     android:paddingHorizontal="8dp"
     android:paddingVertical="2dp">
 
+    <CheckBox
+        android:id="@+id/cb_select"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginLeft="-7dp"
+        android:layout_alignParentLeft="true"
+        android:visibility="gone"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/whiteDetail">
-
-        <CheckBox
-            android:id="@+id/cb_select"
-            android:layout_width="40dp"
-            android:layout_height="60dp"
-            android:gravity="center"
-            android:layout_alignParentLeft="true"
-            android:visibility="gone" />
+        android:background="@drawable/detail_corner"
+        android:layout_toRightOf="@+id/cb_select">
 
         <View
             android:id="@+id/iv_label_img"
             android:layout_width="12dp"
-            android:layout_height="60dp"
-            android:layout_toRightOf="@+id/cb_select" />
+            android:layout_height="60dp" />
 
         <LinearLayout
             android:id="@+id/ll_item_detail"

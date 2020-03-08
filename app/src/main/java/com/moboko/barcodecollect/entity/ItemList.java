@@ -11,7 +11,6 @@ public class ItemList {
     int salePer;
     int taxPrice;
     String memo1;
-    String memo2;
     int favoriteFlag;
     boolean cbSelected;
 
@@ -85,14 +84,6 @@ public class ItemList {
 
     public void setMemo1(String memo1) {
         this.memo1 = memo1;
-    }
-
-    public String getMemo2() {
-        return memo2;
-    }
-
-    public void setMemo2(String memo2) {
-        this.memo2 = memo2;
     }
 
     public int getFavoriteFlag() {

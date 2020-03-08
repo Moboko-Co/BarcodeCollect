@@ -31,7 +31,7 @@ public class Consts {
     public static final String YAHOO_ADD_JAN_CODE = "&jan=";
 
     // データーベースのバージョン
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 1;
 
     // データーベース名
     public static final String DATABASE_NAME = "itemList.db";
@@ -49,7 +49,6 @@ public class Consts {
     public static final String TAX_PRICE = "taxPrice";
     public static final String SALE_PER = "salePer";
     public static final String MEMO1 = "memo1";
-    public static final String MEMO2 = "memo2";
     public static final String DELETE_FLAG = "deleteFlag";
     public static final String ITEM_NM = "itemNm";
 
@@ -74,7 +73,6 @@ public class Consts {
                     SALE_PER + " INTEGER," +
                     TAX_PRICE + " INTEGER," +
                     MEMO1 + " TEXT," +
-                    MEMO2 + " TEXT," +
                     DELETE_FLAG + " TEXT," +
                     REGISTER_DAY + " TEXT" +
                     ")";
@@ -91,12 +89,12 @@ public class Consts {
     public static final String SQL_DELETE_FAVORITE_LIST =
             "DROP TABLE IF EXISTS " + FAVORITE_LIST_TABLE;
     public static final String SELECT_LIST =
-            "SELECT a._id,a.janCd,a.itemNm,a.categoryCd,a.price,a.taxDiv,a.salePer,a.taxPrice,a.memo1,a.memo2,a.registerDay,b.favoriteFlag"
+            "SELECT a._id,a.janCd,a.itemNm,a.categoryCd,a.price,a.taxDiv,a.salePer,a.taxPrice,a.memo1,a.registerDay,b.favoriteFlag"
                     + " FROM   itemList a,favoriteList b"
                     + " WHERE a._id = b._id";
 
     public static final String SELECT_MAX_LIST =
-            "SELECT a._id,a.janCd,a.categoryCd,a.price,a.taxDiv,a.taxPrice,a.memo1,a.memo2,a.registerDay,b.favoriteFlag"
+            "SELECT a._id,a.janCd,a.categoryCd,a.price,a.taxDiv,a.taxPrice,a.memo1,a.registerDay,b.favoriteFlag"
                     + " FROM   (SELECT max(c._id) FROM itemList c) a,favoriteList b"
                     + " WHERE a._id = b._id";
 
@@ -177,7 +175,6 @@ public class Consts {
             + SALE_PER + ","
             + TAX_PRICE + ","
             + MEMO1 + ","
-            + MEMO2 + ","
             + DELETE_FLAG + ","
             + REGISTER_DAY +") "
             + " SELECT "
@@ -190,7 +187,6 @@ public class Consts {
             + "0" + ","
             + TAX_PRICE + ","
             + MEMO1 + ","
-            + MEMO2 + ","
             + DELETE_FLAG + ","
             + REGISTER_DAY
             + " FROM "
