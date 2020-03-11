@@ -10,15 +10,15 @@
         android:id="@+id/cb_select"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
-        android:layout_marginLeft="-7dp"
         android:layout_alignParentLeft="true"
-        android:visibility="gone"/>
+        android:layout_marginLeft="-7dp"
+        android:visibility="gone" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/detail_corner"
-        android:layout_toRightOf="@+id/cb_select">
+        android:layout_toRightOf="@+id/cb_select"
+        android:background="@drawable/detail_corner">
 
         <View
             android:id="@+id/iv_label_img"
@@ -30,41 +30,55 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
-            android:layout_toLeftOf="@id/cb_favorite_button"
             android:layout_toRightOf="@id/iv_label_img"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="2.5"
                 android:layout_height="match_parent"
+                android:layout_weight="2"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_no"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="@color/fontDetailLeft"
+                        android:layout_height="match_parent">
+                    </TextView>
+                    <Button
+                        android:id="@+id/b_jan_cd"
+                        android:layout_width="0dp"
+                        android:layout_weight="7"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="left|center"
+                        android:textColor="@color/textGray"
+                        android:textSize="15sp" />
+                </LinearLayout>
                 <TextView
-                    android:id="@+id/tv_item_memo_1"
-                    android:layout_weight="2.5"
+                    android:id="@+id/tv_item_nm"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:textSize="17dp"
-                    android:maxLines="2"
+                    android:layout_height="45dp"
                     android:ellipsize="end"
-                    android:textColor="@color/fontDetailRight"/>
-                <Button
-                    android:id="@+id/b_jan_cd"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginVertical="1dp"
-                    android:background="@null"
-                    android:textSize="15dp"
-                    android:gravity="left|center"
-                    android:textColor="@color/textGray"/>
+                    android:maxLines="2"
+                    android:text="一二一二一二一二一二一二一二一二一二一二一二一二一二一二一二一二一二一二一二"
+                    android:textColor="@color/fontDetailRight"
+                    android:textSize="16sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
@@ -72,30 +86,37 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="2"
-                    android:textSize="18dp"
+                    android:textStyle="bold"
                     android:gravity="left|center"
-                    android:textColor="@color/fontDetailRight"/>
+                    android:textColor="@color/fontDetailRight"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_register_day"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:textSize="18dp"
-                    android:gravity="left|center"
-                    android:textColor="@color/textGray"/>
+                    android:gravity="center"
+                    android:textColor="@color/textGray"
+                    android:textSize="13sp" />
 
             </LinearLayout>
+            <FrameLayout
+                android:layout_weight="0.4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <CheckBox
+                    android:id="@+id/cb_favorite_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/favorite_button"
+                    android:layout_gravity="center"
+                    />
+
+            </FrameLayout>
+
 
         </LinearLayout>
-
-        <CheckBox
-            android:id="@+id/cb_favorite_button"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:button="@drawable/favorite_button"
-            android:layout_centerVertical="true"
-            android:scaleType="center"/>
     </RelativeLayout>
 </RelativeLayout>

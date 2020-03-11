@@ -14,7 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.moboko.barcodecollect.R;
 import com.moboko.barcodecollect.entity.ItemList;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.moboko.barcodecollect.util.Consts.*;
@@ -76,7 +79,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
                 holder.cbSelect.setChecked(true);
             }
         }
-        holder.tvItemMemo1.setText(item.getItemNm());
+        if (item.getRegisterDay() != null && !item.getRegisterDay().isEmpty()) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            try {
+                Date date = dateFormat.parse(item.getRegisterDay());
+                holder.tvRegisterDay.setText(dateFormat.format(date));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        holder.tvNo.setText(String.valueOf(pos + 1));
+        holder.tvItemNm.setText(item.getItemNm());
         holder.bJanCd.setText(item.getJanCd());
 
         switch (item.getFavoriteFlag()) {
@@ -163,7 +177,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
     public ArrayList<Integer> getSelectList() {
         ArrayList<Integer> selectList = new ArrayList<>();
         for (int i = 0; i < itemLists.size(); i++) {
-            if(itemLists.get(i).getCbSelected()){
+            if (itemLists.get(i).getCbSelected()) {
                 selectList.add(itemLists.get(i).get_id());
             }
         }
