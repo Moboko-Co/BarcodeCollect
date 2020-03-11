@@ -126,7 +126,7 @@ public class Consts {
     public static final String CLIP_BOARD_TAX_3 = "10%";
 
     public static final String NEW_ITEM_NM = "新規商品";
-    public static final String NEW_DIGIT = "0";
+    public static final int NEW_DIGIT = 0;
 
     public static final String ALERT_YES = "はい";
     public static final String ALERT_NO = "いいえ";

@@ -53,6 +53,8 @@ public class InputActivity extends AppCompatActivity {
 
     String idProc;
 
+    Checks checks = new Checks();
+
     FetchPostTasks fetchPostsTask;
 
     List<ItemList> itemList = new ArrayList<>();
@@ -180,7 +182,7 @@ public class InputActivity extends AppCompatActivity {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 //イベントを取得するタイミングには、ボタンが押されてなおかつエンターキーだったときを指定
-                if((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)){
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     //キーボードを閉じる
                     inputMethodManager.hideSoftInputFromWindow(evInputMemo1.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
 
@@ -204,7 +206,6 @@ public class InputActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String per = String.valueOf(evInputPer.getText());
                 setPrice((RadioButton) findViewById(rgTax.getCheckedRadioButtonId()), getPer(String.valueOf(evInputPer.getText())));
             }
         });
@@ -222,7 +223,6 @@ public class InputActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String per = String.valueOf(evInputPer.getText());
                 setPrice((RadioButton) findViewById(rgTax.getCheckedRadioButtonId()), getPer(String.valueOf(evInputPer.getText())));
             }
         });
@@ -238,9 +238,6 @@ public class InputActivity extends AppCompatActivity {
         findViewById(R.id.bt_finish).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Checks checks = new Checks();
-
                 InsertUpdateDate();
 
                 setResult(RESULT_OK, intent);
@@ -270,10 +267,9 @@ public class InputActivity extends AppCompatActivity {
             @Override
             public void CallBack(String result) {
                 super.CallBack(result);
-                if(fetchPostsTask.resItemNm.isEmpty() || fetchPostsTask.resItemNm == null){
+                if (fetchPostsTask.resItemNm == null || fetchPostsTask.resItemNm.isEmpty()) {
                     setNewValue(NEW_ITEM_NM);
-                }
-                else setNewValue(fetchPostsTask.resItemNm);
+                } else setNewValue(fetchPostsTask.resItemNm);
                 //fetchPostsTask.resItemNm;
             }
         });
@@ -331,8 +327,8 @@ public class InputActivity extends AppCompatActivity {
                 break;
         }
         inputItem.setItemNm(String.valueOf(evInputItemNm.getText()));
-        inputItem.setSalePer(Integer.parseInt(String.valueOf(evInputPer.getText())));
-        inputItem.setPrice(Integer.parseInt(String.valueOf(evInputPrice.getText())));
+        inputItem.setSalePer(setDigit(String.valueOf(evInputPer.getText())));
+        inputItem.setPrice(setDigit(String.valueOf(evInputPrice.getText())));
         inputItem.setTaxDiv(setPrice((RadioButton) findViewById(rgTax.getCheckedRadioButtonId()), getPer(String.valueOf(evInputPer.getText()))));
 
         int per = getPer(String.valueOf(evInputPer.getText()));
@@ -413,7 +409,6 @@ public class InputActivity extends AppCompatActivity {
         tvInputJanCd.setText(reqJanCd[0]);
         rgTax.check(R.id.rb_t_1);
         rgCategory.check(R.id.rb_c_1);
-        evInputPer.setText(NEW_DIGIT);
         evInputItemNm.setText(itemNm);
     }
 
@@ -448,5 +443,18 @@ public class InputActivity extends AppCompatActivity {
     void execFetch() {
         url = YAHOO_URL + YAHOO_APP_ID + YAHOO_ADD_JAN_CODE + reqJanCd[0];
         fetchPostsTask.execute(url);
+    }
+
+
+    // 数字セット（NULLの場合、0をセット）)
+    int setDigit(String str){
+        int num;
+
+        if (checks.isNull(str)) {
+            num = NEW_DIGIT;
+        } else {
+            num = Integer.parseInt(str);
+        }
+        return num;
     }
 }

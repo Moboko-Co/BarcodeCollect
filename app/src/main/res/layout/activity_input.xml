@@ -33,7 +33,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/rl_edit_option"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:focusableInTouchMode="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -159,8 +160,7 @@
                             android:layout_toLeftOf="@id/tv_sale_per"
                             android:hint="@string/_0"
                             android:inputType="phone"
-                            android:nextFocusDown="@id/ev_input_memo1"
-                            android:text="@string/_0" />
+                            android:nextFocusDown="@id/ev_input_memo1"/>
 
                         <TextView
                             android:id="@+id/tv_sale_per"

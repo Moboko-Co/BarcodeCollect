@@ -9,4 +9,12 @@ public class Checks {
             return false;
         }
     }
+
+    public boolean isNull(String str) {
+        if (str == null || str.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

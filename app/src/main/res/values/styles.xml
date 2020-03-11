@@ -28,6 +28,15 @@
         <item name="android:background">@drawable/detail_corner</item>
     </style>
 
+    <style name="detail_big">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">110dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:background">@drawable/detail_corner</item>
+    </style>
+
     <style name="detail_big_top">
         <item name="android:orientation">horizontal</item>
         <item name="android:layout_width">match_parent</item>
@@ -148,5 +157,6 @@
         <item name="android:textSize">15dp</item>
         <item name="android:textColor">@color/fontDetailRight</item>
     </style>
+
 
 </resources>
