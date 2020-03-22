@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -74,6 +76,34 @@ public class InputActivity extends AppCompatActivity {
     InputMethodManager inputMethodManager;
     private RelativeLayout llInput;
 
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.detail_option_menu, menu);
+//        return true;
+//    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+//            case R.id.bt_finish:
+//                // ボタンをタップした際の処理を記述
+//                InsertUpdateDate();
+//
+//                setResult(RESULT_OK, intent);
+//                finish();
+//                break;
+
+            case android.R.id.home:
+                // 戻るボタンをタップ
+                setResult(RESULT_CANCELED, intent);
+                finish();
+                break;
+
+        }
+        return true;
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
@@ -85,9 +115,11 @@ public class InputActivity extends AppCompatActivity {
             }
         });
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar_input);
+        Toolbar toolbar = findViewById(R.id.tool_bar_input);
         setSupportActionBar(toolbar);
-        toolbar.setLogo(R.mipmap.ic_launcher_round);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
         mAdView = findViewById(R.id.input_ad);
@@ -235,6 +267,7 @@ public class InputActivity extends AppCompatActivity {
         });
 
 
+
         findViewById(R.id.bt_finish).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -245,13 +278,13 @@ public class InputActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.bt_back).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setResult(RESULT_CANCELED, intent);
-                finish();
-            }
-        });
+//        findViewById(R.id.bt_back).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                setResult(RESULT_CANCELED, intent);
+//                finish();
+//            }
+//        });
 
         findViewById(R.id.bt_continue).setOnClickListener(new View.OnClickListener() {
             @Override

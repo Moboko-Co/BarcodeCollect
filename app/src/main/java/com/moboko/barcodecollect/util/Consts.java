@@ -6,6 +6,8 @@ import java.util.Map;
 
 public class Consts {
 
+    public static final String APP_TITLE = "BARCODE COLLECTOR";
+
     public static final int CAPTURE_REQUEST = 9000;
     public static final int INSERT_REQUEST = 9001;
 
@@ -135,8 +137,8 @@ public class Consts {
             "新しい順",
             "古い順",
             "カテゴリ順",
-            "Janコード昇順",
-            "Janコード降順",
+            "JANコード昇順",
+            "JANコード降順",
             "価格の高い順",
             "価格の安い順"
     };

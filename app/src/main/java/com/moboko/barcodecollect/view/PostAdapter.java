@@ -89,7 +89,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
             }
         }
 
-        holder.tvNo.setText(String.valueOf(pos + 1));
+        holder.ivLabelImg.setText(String.valueOf(pos + 1));
         holder.tvItemNm.setText(item.getItemNm());
         holder.bJanCd.setText(item.getJanCd());
 

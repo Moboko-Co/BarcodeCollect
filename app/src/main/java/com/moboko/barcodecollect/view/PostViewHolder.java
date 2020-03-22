@@ -16,8 +16,8 @@ import com.moboko.barcodecollect.R;
 public class PostViewHolder extends RecyclerView.ViewHolder{
 
     public CheckBox cbSelect,cbFavoriteButton;
-    public View ivLabelImg;
-    public TextView tvItemPrice,tvItemNm,tvRegisterDay,tvNo;
+//    public View ivLabelImg;
+    public TextView tvItemPrice,tvItemNm,tvRegisterDay,ivLabelImg;
     public LinearLayout llItemDetail;
     public ImageButton ibDeleteData;
     public Button bJanCd;
@@ -29,7 +29,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder{
 
         mAdapter = postAdapter;
 
-        tvNo = itemView.findViewById(R.id.tv_no);
+//        tvNo = itemView.findViewById(R.id.tv_no);
         cbSelect = itemView.findViewById(R.id.cb_select);
         ivLabelImg = itemView.findViewById(R.id.iv_label_img);
         bJanCd = itemView.findViewById(R.id.b_jan_cd);

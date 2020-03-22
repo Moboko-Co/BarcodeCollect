@@ -8,14 +8,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -48,12 +53,32 @@ public class MainActivity extends AppCompatActivity {
     private DbOpenHelper helper;
     private SQLiteDatabase db;
     Button ibJanCdSearch, ibEditSelect, ibCopyData, ibDeleteData;
-    Button btBack;
-    RelativeLayout rlNormalOption, rlEditOption;
+//    Button btBack;
+    LinearLayout rlNormalOption, rlEditOption;
     CheckBox cbShowFavorite, cbAllSelect, cbOnlyFavorite;
     Spinner spSortItem;
     int currentSortOption = 0;
     private AdView mAdView;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case android.R.id.home:
+                // 戻るボタンをタップ
+                if (cbShowFavorite.isChecked() == true) {
+                    rvListSet((RecyclerView) findViewById(R.id.item_rv), FAVORITE_SHOW_MODE);
+                } else {
+                    rvListSet((RecyclerView) findViewById(R.id.item_rv), NORMAL_MODE);
+                }
+                getSupportActionBar().setDisplayShowHomeEnabled(false);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+                break;
+
+        }
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,12 +95,11 @@ public class MainActivity extends AppCompatActivity {
         ibDeleteData = findViewById(R.id.ib_delete_data);
         rlNormalOption = findViewById(R.id.rl_normal_option);
         rlEditOption = findViewById(R.id.rl_edit_option);
-        btBack = findViewById(R.id.bt_back);
+//        btBack = findViewById(R.id.bt_back);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar_main);
-        toolbar.setLogo(R.drawable.action_header);
+        Toolbar toolbar = findViewById(R.id.tool_bar_main);
+        //toolbar.setLogo(R.drawable.action_header);
         setSupportActionBar(toolbar);
-
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -139,16 +163,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //オプションモード｜戻るボタン
-        btBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (cbShowFavorite.isChecked() == true) {
-                    rvListSet((RecyclerView) findViewById(R.id.item_rv), FAVORITE_SHOW_MODE);
-                } else {
-                    rvListSet((RecyclerView) findViewById(R.id.item_rv), NORMAL_MODE);
-                }
-            }
-        });
+//        btBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (cbShowFavorite.isChecked() == true) {
+//                    rvListSet((RecyclerView) findViewById(R.id.item_rv), FAVORITE_SHOW_MODE);
+//                } else {
+//                    rvListSet((RecyclerView) findViewById(R.id.item_rv), NORMAL_MODE);
+//                }
+//            }
+//        });
 
         //オプションモード｜コピーボタン
         ibCopyData.setOnClickListener(new View.OnClickListener() {
@@ -350,6 +374,9 @@ public class MainActivity extends AppCompatActivity {
             ibCopyData.setVisibility(View.VISIBLE);
             ibDeleteData.setVisibility(View.VISIBLE);
             rlEditOption.setVisibility(View.VISIBLE);
+
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
             SelectData selectNormalShow = new SelectData(helper, db);
             itemList = selectNormal(selectNormalShow, null).getData(OPTION_MODE);

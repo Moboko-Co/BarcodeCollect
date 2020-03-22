@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#375797</color>
+    <color name="colorPrimary">#303136</color>
     <color name="windowsBackground">#EBEBEB</color>
-    <color name="colorAccent">#375797</color>
+    <color name="colorAccent">#303136</color>
     <color name="colorPrimaryDark">#666666</color>
     <color name="colorDetail">#FFFFFF</color>
 
@@ -12,14 +12,14 @@
     <color name="category3">#EAD880</color>
     <color name="category4">#EECFBB</color>
 
-    <color name="tax1">#A9CEF7</color>
-    <color name="tax2">#A9CEF7</color>
-    <color name="tax3">#A9CEF7</color>
+    <color name="tax1">#949494</color>
+    <color name="tax2">#949494</color>
+    <color name="tax3">#949494</color>
 
     <color name="textGray">#666666</color>
 
-    <color name="fontDetailLeft">#000000</color>
-    <color name="fontDetailRight">#000000</color>
+    <color name="fontDetailLeft">#303136</color>
+    <color name="fontDetailRight">#303136</color>
     <color name="fontAppTop">#FFFFFF</color>
     <color name="fontDetailRightEt">#B57FB3</color>
 

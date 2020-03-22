@@ -3,19 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tool_bar_main"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_alignParentTop="true"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+        android:background="@color/colorPrimary"
+        android:theme="@style/ToolbarTheme"
+        app:contentInsetStart="0dp">
 
-    <RelativeLayout
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/app_name"
+            android:gravity="center"
+            android:textColor="@color/colorDetail"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText"
+            />
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
         android:id="@+id/rl_normal_option"
         style="@style/app_top">
 
@@ -23,38 +39,45 @@
             android:id="@+id/cb_show_favorite"
             style="@style/app_top_item"
             android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:textSize="13sp"
             android:text="@string/like_only" />
 
         <Spinner
             android:id="@+id/sp_sort_item"
             style="@style/app_top_item"
+            android:textSize="13sp"
             android:layout_alignParentRight="true"/>
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/rl_edit_option"
         style="@style/app_top"
+        android:orientation="horizontal"
         android:visibility="gone">
 
-        <Button
+<!--        <Button
             android:id="@+id/bt_back"
             style="@style/app_top_item"
             android:layout_alignParentLeft="true"
             android:background="@null"
-            android:text="@string/back" />
+            android:text="@string/back" />-->
 
         <CheckBox
             android:id="@+id/cb_all_select"
+            android:layout_marginLeft="15dp"
             style="@style/app_top_item"
             android:layout_toLeftOf="@+id/cb_only_favorite"
+            android:textSize="13sp"
             android:text="@string/all_select" />
 
         <CheckBox
             android:id="@+id/cb_only_favorite"
             style="@style/app_top_item"
             android:layout_alignParentRight="true"
+            android:textSize="13sp"
             android:text="@string/like_only" />
-    </RelativeLayout>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/item_rv"

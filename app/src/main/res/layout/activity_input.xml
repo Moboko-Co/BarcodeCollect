@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_input"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,31 +9,32 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tool_bar_input"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
         android:background="@color/colorPrimary"
-        android:layout_alignParentTop="true"/>
+        android:theme="@style/ToolbarTheme">
 
+    </androidx.appcompat.widget.Toolbar>
 
-    <RelativeLayout
-        android:id="@+id/rl_edit_option"
-        style="@style/app_top"
-        android:layout_below="@id/tool_bar_input"
-        >
+    <!--    <RelativeLayout
+            android:id="@+id/rl_edit_option"
+            style="@style/app_top"
+            android:layout_below="@id/tool_bar_input"
+            >
 
-        <Button
-            android:id="@+id/bt_back"
-            style="@style/app_top_item"
-            android:layout_alignParentStart="true"
-            android:background="@null"
-            android:text="@string/back" />
-    </RelativeLayout>
+            <Button
+                android:id="@+id/bt_back"
+                style="@style/app_top_item"
+                android:layout_alignParentStart="true"
+                android:background="@null"
+                android:text="@string/back" />
+        </RelativeLayout>-->
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/rl_edit_option"
+        android:layout_below="@id/tool_bar_input"
         android:fillViewport="true"
         android:focusableInTouchMode="true">
 
@@ -135,12 +137,17 @@
 
                         <EditText
                             android:id="@+id/ev_input_price"
-                            style="@style/detail_edit_text"
+                            style="@style/detail_small_edit_text"
                             android:layout_width="100dp"
                             android:layout_alignParentLeft="true"
                             android:hint="@string/_0"
                             android:inputType="phone"
-                            android:nextFocusDown="@id/ev_input_per"><requestFocus/></EditText>>
+                            android:nextFocusDown="@id/ev_input_per">
+
+                            <requestFocus />
+                        </EditText>
+                        >
+
                         <TextView
                             android:id="@+id/tv_yen_text"
                             style="@style/const_text"
@@ -155,12 +162,12 @@
 
                         <EditText
                             android:id="@+id/ev_input_per"
-                            style="@style/detail_edit_text"
+                            style="@style/detail_small_edit_text"
                             android:layout_width="50dp"
                             android:layout_toLeftOf="@id/tv_sale_per"
                             android:hint="@string/_0"
                             android:inputType="phone"
-                            android:nextFocusDown="@id/ev_input_memo1"/>
+                            android:nextFocusDown="@id/ev_input_memo1" />
 
                         <TextView
                             android:id="@+id/tv_sale_per"
@@ -224,14 +231,14 @@
                         style="@style/detail_left_small"
                         android:text="@string/calc_result" />
 
-                    <RelativeLayout
-                        style="@style/detail_right_small">
-                    <TextView
-                        android:id="@+id/tv_output_price"
-                        android:textColor="@color/fontDetailLeft"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center|left"/>
+                    <RelativeLayout style="@style/detail_right_small">
+
+                        <TextView
+                            android:id="@+id/tv_output_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center|left"
+                            android:textColor="@color/fontDetailLeft" />
 
                         <TextView
                             android:id="@+id/tv_yen_text2"
@@ -252,19 +259,13 @@
                     style="@style/detail_left_small"
                     android:text="@string/memo_1" />
 
-                <LinearLayout style="@style/detail_right_small">
-
-                    <EditText
-                        android:id="@+id/ev_input_memo1"
-                        style="@style/detail_edit_text"
-                        android:layout_width="match_parent"
-                        android:inputType="text"/>
-                </LinearLayout>
+                <EditText
+                    android:id="@+id/ev_input_memo1"
+                    style="@style/detail_edit_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="2.5"
+                    android:inputType="text" />
             </LinearLayout>
-
-            <View style="@style/separate_line" />
-
-
 
             <View style="@style/separate_line" />
 
@@ -280,16 +281,15 @@
                     style="@style/detail_right_small" />
 
             </LinearLayout>
-            <com.google.android.gms.ads.AdView
-                xmlns:ads="http://schemas.android.com/apk/res-auto"
+
+            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/input_ad"
-                android:layout_below="@id/rl_edit_option"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/rl_edit_option"
                 android:layout_centerHorizontal="true"
                 ads:adSize="SMART_BANNER"
-                ads:adUnitId="@string/ad_2">
-            </com.google.android.gms.ads.AdView>
+                ads:adUnitId="@string/ad_2"></com.google.android.gms.ads.AdView>
 
             <LinearLayout
                 android:id="@+id/ll_button_group"
@@ -316,7 +316,6 @@
                     android:background="@drawable/ib_frame_top"
                     android:drawableTop="@drawable/ic_check_24px"
                     android:text="@string/finish" />
-
 
             </LinearLayout>
         </LinearLayout>
