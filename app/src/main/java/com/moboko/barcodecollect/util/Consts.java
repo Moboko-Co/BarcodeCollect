@@ -6,8 +6,6 @@ import java.util.Map;
 
 public class Consts {
 
-    public static final String APP_TITLE = "BARCODE COLLECTOR";
-
     public static final int CAPTURE_REQUEST = 9000;
     public static final int INSERT_REQUEST = 9001;
 
