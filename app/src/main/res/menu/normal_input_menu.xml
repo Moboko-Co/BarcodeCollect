@@ -5,13 +5,13 @@
         android:id="@+id/bt_continue"
         android:icon="@drawable/ic_photo_camera_black_24dp"
         android:orderInCategory="100"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         android:title="@string/continue_regist"/>
 
     <item
         android:id="@+id/bt_finish"
         android:icon="@drawable/ic_check_24px"
         android:orderInCategory="101"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         android:title="@string/finish"/>
 </menu>

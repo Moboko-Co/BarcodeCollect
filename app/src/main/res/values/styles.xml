@@ -17,7 +17,7 @@
 
     <style name="app_top">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_height">@dimen/dp_m_top</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:background">@color/colorDetail</item>
     </style>
@@ -69,7 +69,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:gravity">left|center</item>
-        <item name="android:textSize">15dp</item>
+        <item name="android:textSize">@dimen/sp_l</item>
         <item name="android:textColor">@color/fontDetailLeft</item>
     </style>
 
@@ -82,7 +82,7 @@
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginRight">5dp</item>
         <item name="android:gravity">left|center</item>
-        <item name="android:textSize">15dp</item>
+        <item name="android:textSize">@dimen/sp_l</item>
         <item name="android:textColor">@color/fontDetailRight</item>
     </style>
 
@@ -94,7 +94,7 @@
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginRight">5dp</item>
         <item name="android:gravity">left|bottom</item>
-        <item name="android:textSize">15dp</item>
+        <item name="android:textSize">@dimen/sp_l</item>
         <item name="android:textColor">@color/fontDetailRight</item>
     </style>
 
@@ -102,7 +102,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_marginBottom">5dp</item>
         <item name="android:gravity">left|bottom</item>
-        <item name="android:textSize">15dp</item>
+        <item name="android:textSize">@dimen/sp_l</item>
         <item name="android:textColor">@color/fontDetailRight</item>
     </style>
 
@@ -165,7 +165,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">15dp</item>
+        <item name="android:textSize">@dimen/sp_l</item>
         <item name="android:textColor">@color/fontDetailRight</item>
     </style>
 

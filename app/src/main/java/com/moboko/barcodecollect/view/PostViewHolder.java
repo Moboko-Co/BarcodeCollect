@@ -18,7 +18,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder{
     public CheckBox cbSelect,cbFavoriteButton;
 //    public View ivLabelImg;
     public TextView tvItemPrice,tvItemNm,tvRegisterDay,ivLabelImg;
-    public LinearLayout llItemDetail;
+    public LinearLayout llItemDetail,llItemDetailLeft,llItemDetailRight;
     public ImageButton ibDeleteData;
     public Button bJanCd;
 
@@ -37,6 +37,8 @@ public class PostViewHolder extends RecyclerView.ViewHolder{
         tvItemPrice = itemView.findViewById(R.id.tv_item_price);
         cbFavoriteButton = itemView.findViewById(R.id.cb_favorite_button);
         llItemDetail = itemView.findViewById(R.id.ll_item_detail);
+        llItemDetailLeft = itemView.findViewById(R.id.ll_item_detail_left);
+        llItemDetailRight = itemView.findViewById(R.id.ll_item_detail_right);
         ibDeleteData = itemView.findViewById(R.id.ib_delete_data);
         tvRegisterDay = itemView.findViewById(R.id.tv_register_day);
 

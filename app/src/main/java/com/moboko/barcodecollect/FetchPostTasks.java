@@ -72,7 +72,7 @@ public class FetchPostTasks  extends AsyncTask<String, Void, String> {
             JSONObject resultObject = result0Object.getJSONObject("Result");
             JSONObject itemObject = resultObject.getJSONObject("0");
             str = itemObject.getString("Name");
-        } catch (JSONException | IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             Log.d("SEARCHITEM : TOJSON", e.getMessage());
             return null;

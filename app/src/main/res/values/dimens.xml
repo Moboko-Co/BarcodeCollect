@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="sp_l">15sp</dimen>
+    <dimen name="sp_m">14sp</dimen>
+    <dimen name="sp_s">13sp</dimen>
+    <dimen name="dp_m">5dp</dimen>
+
+    <dimen name="dp_m_top">45dp</dimen>
+
+</resources>

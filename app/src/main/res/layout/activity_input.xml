@@ -136,7 +136,8 @@
                             android:layout_width="100dp"
                             android:layout_alignParentLeft="true"
                             android:hint="@string/_0"
-                            android:inputType="phone"
+                            android:inputType="number"
+                            android:maxLength="8"
                             android:nextFocusDown="@id/ev_input_per">
 
                             <requestFocus />
@@ -161,7 +162,7 @@
                             android:layout_width="50dp"
                             android:layout_toLeftOf="@id/tv_sale_per"
                             android:hint="@string/_0"
-                            android:inputType="phone"
+                            android:inputType="number"
                             android:nextFocusDown="@id/ev_input_memo1" />
 
                         <TextView
@@ -259,6 +260,7 @@
                     style="@style/detail_edit_text"
                     android:layout_width="0dp"
                     android:layout_weight="2.5"
+                    android:maxLength="20"
                     android:inputType="text" />
             </LinearLayout>
 

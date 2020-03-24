@@ -8,10 +8,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -19,6 +21,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -84,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 getSupportActionBar().setDisplayShowHomeEnabled(false);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-
                 changeMenuItem(R.menu.normal_main_menu);
                 break;
             //バーコード検索起動
@@ -222,8 +224,8 @@ public class MainActivity extends AppCompatActivity {
         rlEditOption = findViewById(R.id.rl_edit_option);
 
         Toolbar toolbar = findViewById(R.id.tool_bar_main);
-//        toolbar.setLogo(R.drawable.ic_logo);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -239,7 +241,24 @@ public class MainActivity extends AppCompatActivity {
         rvListSet((RecyclerView) findViewById(R.id.item_rv), NORMAL_MODE);
 
         //ソートspinner表示
-        ArrayAdapter spAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, SORT_TITLE);
+        ArrayAdapter spAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, SORT_TITLE){
+            // テキストの位置
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View v = super.getView(position, convertView, parent);
+                ((TextView) v).setGravity(Gravity.RIGHT);
+           //     ((TextView) v).setTextSize(Float.parseFloat("14sp"));
+                return v;
+            }
+
+            // 選択肢の位置
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                View v = super.getDropDownView(position, convertView,parent);
+                ((TextView) v).setGravity(Gravity.RIGHT);
+            //    ((TextView) v).setTextSize(Float.parseFloat("14sp"));
+                return v;
+            }
+        };
+        //  spAdapter.setDropDownViewResource(R.layout.sort_spinner_dropdown_item);
         spSortItem.setAdapter(spAdapter);
         spSortItem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -398,7 +417,8 @@ public class MainActivity extends AppCompatActivity {
                         updateData.setDbFavoriteList(favoriteList);
                         updateData.updateDbFavoriteList(updateFavoritePrm);
                         break;
-                    case R.id.ll_item_detail:
+                    case R.id.ll_item_detail_left:
+                    case R.id.ll_item_detail_right:
                         Intent intent = new Intent(MainActivity.this, InputActivity.class);
                         intent.putExtra(UPDATE_PROC, String.valueOf(itemList.get(postAdapter.getLine()).get_id()));
                         intent.putExtra(ID_PROC, UPDATE_FLAG);

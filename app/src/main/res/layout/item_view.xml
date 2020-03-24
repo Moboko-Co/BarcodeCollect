@@ -13,17 +13,12 @@
         android:layout_alignParentLeft="true"
         android:visibility="gone" />
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_toRightOf="@+id/cb_select"
-        android:background="@drawable/detail_corner">
-
         <LinearLayout
             android:id="@+id/ll_item_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/colorDetail"
+            android:layout_toRightOf="@+id/cb_select"
             android:orientation="horizontal">
 
             <TextView
@@ -33,10 +28,11 @@
                 android:layout_weight="0.2"
                 android:gravity="center"
                 android:textColor="@color/colorDetail"
-                android:textSize="14sp"
+                android:textSize="@dimen/sp_m"
                 android:textStyle="bold"></TextView>
 
             <LinearLayout
+                android:id="@+id/ll_item_detail_left"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
@@ -52,7 +48,7 @@
                     android:gravity="left|center"
                     android:drawableRight="@drawable/ic_launch_black_24dp"
                     android:drawablePadding="2dp"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/sp_m" />
 
                 <TextView
                     android:id="@+id/tv_item_nm"
@@ -61,10 +57,11 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:textColor="@color/textGray"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/sp_m" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_item_detail_right"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="3dp"
@@ -78,7 +75,7 @@
                     android:layout_height="28dp"
                     android:gravity="left|center"
                     android:textColor="@color/fontDetailRight"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/sp_m" />
 
                 <TextView
                     android:id="@+id/tv_item_price"
@@ -86,7 +83,7 @@
                     android:layout_height="28dp"
                     android:gravity="left"
                     android:textColor="@color/textGray"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/sp_m" />
 
             </LinearLayout>
 
@@ -106,5 +103,4 @@
 
 
         </LinearLayout>
-    </RelativeLayout>
 </RelativeLayout>

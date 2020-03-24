@@ -1,5 +1,6 @@
 package com.moboko.barcodecollect;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,6 +21,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -98,6 +100,8 @@ public class InputActivity extends AppCompatActivity {
             // 戻るボタンをタップ
             case android.R.id.home:
                 setResult(RESULT_CANCELED, intent);
+                //キーボードを閉じる
+                keyClose();
                 finish();
                 break;
 
@@ -311,10 +315,8 @@ public class InputActivity extends AppCompatActivity {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     //キーボードを閉じる
                     keyClose();
-
                     return true;
                 }
-
                 return false;
             }
         });
@@ -367,6 +369,8 @@ public class InputActivity extends AppCompatActivity {
                 super.CallBack(result);
                 if (fetchPostsTask.resItemNm == null || fetchPostsTask.resItemNm.isEmpty()) {
                     setNewValue(NEW_ITEM_NM);
+                    Toast.makeText(InputActivity.this, GET_NAME_FAILED_MESSAGE, Toast.LENGTH_LONG).show();
+
                 } else setNewValue(fetchPostsTask.resItemNm);
                 //fetchPostsTask.resItemNm;
             }
@@ -377,13 +381,14 @@ public class InputActivity extends AppCompatActivity {
 
     private String setPrice(RadioButton rbTax, int evPer) {
         int inputPrice = 0;
-
-        Checks checks = new Checks();
-
-        if (checks.isNumber(String.valueOf(evInputPrice.getText()))) {
+        String evPrice = String.valueOf(evInputPrice.getText());
+        if(checks.isNull(evPrice)){
+            tvOutputPrice.setText(String.valueOf(0));
+        } else if(checks.isNumber(String.valueOf(evInputPrice.getText()))) {
             inputPrice = Integer.parseInt(String.valueOf(evInputPrice.getText()));
         } else {
-            tvOutputPrice.setText(String.valueOf(0));
+
+
         }
 
         String priceStr = new String();

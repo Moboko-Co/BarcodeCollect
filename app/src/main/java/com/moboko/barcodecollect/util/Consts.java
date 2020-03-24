@@ -14,6 +14,7 @@ public class Consts {
     public static final String SUCCESS_MESSAGE = "登録に成功しました";
     public static final String COPY_MESSAGE = "クリップボードにコピーしました";
     public static final String COPY_ERROR_MESSAGE = "コピー対象がありません";
+    public static final String GET_NAME_FAILED_MESSAGE = "商品名が取得できませんでした";
 
     public static final int RE_CAPUTRE_RESPONSE = 10;
 

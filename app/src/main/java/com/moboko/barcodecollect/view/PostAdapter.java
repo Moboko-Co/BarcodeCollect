@@ -124,7 +124,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
                 break;
         }
 
-        holder.llItemDetail.setOnClickListener(new View.OnClickListener() {
+        holder.llItemDetailLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mSelectMode == NORMAL_MODE || mSelectMode == FAVORITE_SHOW_MODE){
+                    m_line = pos; //行数を登録
+                    m_listener.onClick(view);
+                }
+            }
+        });
+        holder.llItemDetailRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(mSelectMode == NORMAL_MODE || mSelectMode == FAVORITE_SHOW_MODE){
