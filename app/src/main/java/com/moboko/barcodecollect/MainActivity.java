@@ -8,13 +8,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -40,42 +42,7 @@ import com.moboko.barcodecollect.view.PostAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.moboko.barcodecollect.util.Consts.ALERT_NO;
-import static com.moboko.barcodecollect.util.Consts.ALERT_YES;
-import static com.moboko.barcodecollect.util.Consts.CANCELED_MESSAGE;
-import static com.moboko.barcodecollect.util.Consts.CAPTURE_REQUEST;
-import static com.moboko.barcodecollect.util.Consts.CLIP_BOARD_TAX_1;
-import static com.moboko.barcodecollect.util.Consts.CLIP_BOARD_TAX_2;
-import static com.moboko.barcodecollect.util.Consts.CLIP_BOARD_TAX_3;
-import static com.moboko.barcodecollect.util.Consts.COPY_ERROR_MESSAGE;
-import static com.moboko.barcodecollect.util.Consts.COPY_MESSAGE;
-import static com.moboko.barcodecollect.util.Consts.DELETE_FLAG;
-import static com.moboko.barcodecollect.util.Consts.DEL_ALERT_MESSAGE;
-import static com.moboko.barcodecollect.util.Consts.DEL_ALERT_TITLE;
-import static com.moboko.barcodecollect.util.Consts.FAVORITE_SHOW_MODE;
-import static com.moboko.barcodecollect.util.Consts.ID;
-import static com.moboko.barcodecollect.util.Consts.ID_PROC;
-import static com.moboko.barcodecollect.util.Consts.INSERT_FLAG;
-import static com.moboko.barcodecollect.util.Consts.INSERT_PROC;
-import static com.moboko.barcodecollect.util.Consts.INSERT_REQUEST;
-import static com.moboko.barcodecollect.util.Consts.ITEM_LIST_TABLE;
-import static com.moboko.barcodecollect.util.Consts.MODE_DEFAULT;
-import static com.moboko.barcodecollect.util.Consts.NORMAL_MODE;
-import static com.moboko.barcodecollect.util.Consts.OPTION_ALL_FAVORITE;
-import static com.moboko.barcodecollect.util.Consts.OPTION_ALL_SELECT;
-import static com.moboko.barcodecollect.util.Consts.OPTION_MODE;
-import static com.moboko.barcodecollect.util.Consts.OPTION_ZERO_FAVORITE;
-import static com.moboko.barcodecollect.util.Consts.OPTION_ZERO_SELECT;
-import static com.moboko.barcodecollect.util.Consts.ORDER_BY;
-import static com.moboko.barcodecollect.util.Consts.RE_CAPUTRE_RESPONSE;
-import static com.moboko.barcodecollect.util.Consts.SELECTED_ERROR;
-import static com.moboko.barcodecollect.util.Consts.SELECT_LIST;
-import static com.moboko.barcodecollect.util.Consts.SORT_TITLE;
-import static com.moboko.barcodecollect.util.Consts.SUCCESS_MESSAGE;
-import static com.moboko.barcodecollect.util.Consts.UPDATE_FLAG;
-import static com.moboko.barcodecollect.util.Consts.UPDATE_PROC;
-import static com.moboko.barcodecollect.util.Consts.WHERE_DELETE_FLAG;
-import static com.moboko.barcodecollect.util.Consts.WHERE_ID;
+import static com.moboko.barcodecollect.util.Consts.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -83,13 +50,26 @@ public class MainActivity extends AppCompatActivity {
     PostAdapter postAdapter;
     private DbOpenHelper helper;
     private SQLiteDatabase db;
-    Button ibJanCdSearch, ibEditSelect, ibCopyData, ibDeleteData;
-    //    Button btBack;
     LinearLayout rlNormalOption, rlEditOption;
     CheckBox cbShowFavorite, cbAllSelect, cbOnlyFavorite;
     Spinner spSortItem;
     int currentSortOption = 0;
     private AdView mAdView;
+
+    private int mMenuResourceId = R.menu.normal_main_menu;
+
+    // Menuを切り替えたい箇所から呼び出す
+    public void changeMenuItem(int menuResourceId) {
+        this.mMenuResourceId = menuResourceId;
+        supportInvalidateOptionsMenu();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(mMenuResourceId, menu);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -105,98 +85,19 @@ public class MainActivity extends AppCompatActivity {
                 getSupportActionBar().setDisplayShowHomeEnabled(false);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
+                changeMenuItem(R.menu.normal_main_menu);
                 break;
-
-        }
-        return true;
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        spSortItem = findViewById(R.id.sp_sort_item);
-        cbShowFavorite = findViewById(R.id.cb_show_favorite);
-        cbAllSelect = findViewById(R.id.cb_all_select);
-        cbOnlyFavorite = findViewById(R.id.cb_only_favorite);
-        ibJanCdSearch = findViewById(R.id.ib_jan_cd_search);
-        ibEditSelect = findViewById(R.id.ib_edit_select);
-        ibCopyData = findViewById(R.id.ib_copy_data);
-        ibDeleteData = findViewById(R.id.ib_delete_data);
-        rlNormalOption = findViewById(R.id.rl_normal_option);
-        rlEditOption = findViewById(R.id.rl_edit_option);
-//        btBack = findViewById(R.id.bt_back);
-
-        Toolbar toolbar = findViewById(R.id.tool_bar_main);
-        //toolbar.setLogo(R.drawable.action_header);
-        setSupportActionBar(toolbar);
-
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-        mAdView = findViewById(R.id.main_ad);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
-        //初期表示
-        rvListSet((RecyclerView) findViewById(R.id.item_rv), NORMAL_MODE);
-
-        //ソートspinner表示
-        ArrayAdapter spAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, SORT_TITLE);
-        spSortItem.setAdapter(spAdapter);
-        spSortItem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                currentSortOption = position;
-                if (cbShowFavorite.isChecked()) {
-                    rvListSet((RecyclerView) findViewById(R.id.item_rv), FAVORITE_SHOW_MODE);
-                } else {
-                    rvListSet((RecyclerView) findViewById(R.id.item_rv), NORMAL_MODE);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        //お気に入りのみ表示
-        cbShowFavorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked && cbShowFavorite.isPressed()) {
-                    rvListSet((RecyclerView) findViewById(R.id.item_rv), FAVORITE_SHOW_MODE);
-                } else if (!isChecked && cbShowFavorite.isPressed()) {
-                    rvListSet((RecyclerView) findViewById(R.id.item_rv), NORMAL_MODE);
-                }
-            }
-        });
-
-        //バーコード検索起動
-        ibJanCdSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            //バーコード検索起動
+            case R.id.ib_jan_cd_search:
                 callJanCdCaptureActivity();
-            }
-        });
-
-        //オプションモード起動
-        ibEditSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            //オプションモード起動
+            case R.id.ib_edit_select:
                 rvListSet((RecyclerView) findViewById(R.id.item_rv), OPTION_MODE);
-            }
-        });
-
-        //オプションモード｜コピーボタン
-        ibCopyData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                changeMenuItem(R.menu.option_main_menu);
+                break;
+            //コピーボタン押下
+            case R.id.ib_copy_data:
                 ArrayList<Integer> mSelectList = postAdapter.getSelectList();
                 int count = mSelectList.size();
 
@@ -251,12 +152,12 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                     //クリップボードに格納するItemを作成
-                    ClipData.Item item = new ClipData.Item(input);
+                    ClipData.Item clipItem = new ClipData.Item(input);
                     //MIMETYPEの作成
                     String[] mimeType = new String[1];
                     mimeType[0] = ClipDescription.MIMETYPE_TEXT_PLAIN;
                     //クリップボードに格納するClipDataオブジェクトの作成
-                    ClipData cd = new ClipData(new ClipDescription("text_data", mimeType), item);
+                    ClipData cd = new ClipData(new ClipDescription("text_data", mimeType), clipItem);
 
                     //クリップボードにデータを格納
                     ClipboardManager cm = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
@@ -264,19 +165,14 @@ public class MainActivity extends AppCompatActivity {
 
                     Toast.makeText(MainActivity.this, COPY_MESSAGE, Toast.LENGTH_LONG).show();
                 }
-            }
-        });
+                break;
 
-        //オプションモード｜削除ボタン
-        ibDeleteData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final ArrayList<Integer> mSelectList = postAdapter.getSelectList();
-                //postAdapter.setSelectList();
-                final Integer[] array = mSelectList.toArray(new Integer[mSelectList.size()]);
+            case R.id.ib_delete_data:
+                final ArrayList<Integer> mDelList = postAdapter.getSelectList();
+                final Integer[] array = mDelList.toArray(new Integer[mDelList.size()]);
 
-                int count = mSelectList.size();
-                if (count == 0) {
+                int delCount = mDelList.size();
+                if (delCount == 0) {
                     Toast.makeText(MainActivity.this, SELECTED_ERROR, Toast.LENGTH_LONG).show();
                 } else {
                     new AlertDialog.Builder(MainActivity.this)
@@ -288,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
                                     values.put(DELETE_FLAG, "'1'");
                                     connectDb();
 
-                                    for (int i = 0; i < mSelectList.size(); i++) {
+                                    for (int i = 0; i < mDelList.size(); i++) {
                                         db.update(ITEM_LIST_TABLE, values, ID + "= ?", new String[]{String.valueOf(array[i])});
                                     }
 
@@ -306,6 +202,70 @@ public class MainActivity extends AppCompatActivity {
                             })
                             .show();
 
+                }
+                break;
+
+        }
+        return true;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        spSortItem = findViewById(R.id.sp_sort_item);
+        cbShowFavorite = findViewById(R.id.cb_show_favorite);
+        cbAllSelect = findViewById(R.id.cb_all_select);
+        cbOnlyFavorite = findViewById(R.id.cb_only_favorite);
+        rlNormalOption = findViewById(R.id.rl_normal_option);
+        rlEditOption = findViewById(R.id.rl_edit_option);
+
+        Toolbar toolbar = findViewById(R.id.tool_bar_main);
+//        toolbar.setLogo(R.drawable.ic_logo);
+        setSupportActionBar(toolbar);
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mAdView = findViewById(R.id.main_ad);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        //初期表示
+        rvListSet((RecyclerView) findViewById(R.id.item_rv), NORMAL_MODE);
+
+        //ソートspinner表示
+        ArrayAdapter spAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, SORT_TITLE);
+        spSortItem.setAdapter(spAdapter);
+        spSortItem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                currentSortOption = position;
+                if (cbShowFavorite.isChecked()) {
+                    rvListSet((RecyclerView) findViewById(R.id.item_rv), FAVORITE_SHOW_MODE);
+                } else {
+                    rvListSet((RecyclerView) findViewById(R.id.item_rv), NORMAL_MODE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //お気に入りのみ表示
+        cbShowFavorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked && cbShowFavorite.isPressed()) {
+                    rvListSet((RecyclerView) findViewById(R.id.item_rv), FAVORITE_SHOW_MODE);
+                } else if (!isChecked && cbShowFavorite.isPressed()) {
+                    rvListSet((RecyclerView) findViewById(R.id.item_rv), NORMAL_MODE);
                 }
             }
         });
@@ -383,13 +343,9 @@ public class MainActivity extends AppCompatActivity {
 
         } else if (selectMode == OPTION_MODE) {
             //非表示
-            ibJanCdSearch.setVisibility(View.GONE);
-            ibEditSelect.setVisibility(View.GONE);
             rlNormalOption.setVisibility(View.GONE);
 
             //表示
-            ibCopyData.setVisibility(View.VISIBLE);
-            ibDeleteData.setVisibility(View.VISIBLE);
             rlEditOption.setVisibility(View.VISIBLE);
 
             getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -471,13 +427,9 @@ public class MainActivity extends AppCompatActivity {
         cbOnlyFavorite.setChecked(false);
 
         //非表示
-        ibJanCdSearch.setVisibility(View.VISIBLE);
-        ibEditSelect.setVisibility(View.VISIBLE);
         rlNormalOption.setVisibility(View.VISIBLE);
 
         //表示
-        ibCopyData.setVisibility(View.GONE);
-        ibDeleteData.setVisibility(View.GONE);
         rlEditOption.setVisibility(View.GONE);
     }
 

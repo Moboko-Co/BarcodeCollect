@@ -17,24 +17,19 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <!--    <RelativeLayout
-            android:id="@+id/rl_edit_option"
-            style="@style/app_top"
-            android:layout_below="@id/tool_bar_input"
-            >
-
-            <Button
-                android:id="@+id/bt_back"
-                style="@style/app_top_item"
-                android:layout_alignParentStart="true"
-                android:background="@null"
-                android:text="@string/back" />
-        </RelativeLayout>-->
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/input_ad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tool_bar_input"
+        android:layout_centerHorizontal="true"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/ad_2"></com.google.android.gms.ads.AdView>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tool_bar_input"
+        android:layout_below="@id/input_ad"
         android:fillViewport="true"
         android:focusableInTouchMode="true">
 
@@ -282,42 +277,6 @@
 
             </LinearLayout>
 
-            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/input_ad"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/rl_edit_option"
-                android:layout_centerHorizontal="true"
-                ads:adSize="SMART_BANNER"
-                ads:adUnitId="@string/ad_2"></com.google.android.gms.ads.AdView>
-
-            <LinearLayout
-                android:id="@+id/ll_button_group"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorDetail"
-                android:gravity="bottom"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/bt_continue"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/ib_frame_top"
-                    android:drawableTop="@drawable/ic_barcode"
-                    android:text="@string/continue_regist" />
-
-                <Button
-                    android:id="@+id/bt_finish"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/ib_frame_top"
-                    android:drawableTop="@drawable/ic_check_24px"
-                    android:text="@string/finish" />
-
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

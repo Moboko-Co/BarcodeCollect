@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/ib_edit_select"
+        android:icon="@drawable/ic_check_box_24px"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"
+        android:title="@string/select"/>
+
+    <item
+        android:id="@+id/ib_jan_cd_search"
+        android:icon="@drawable/ic_photo_camera_black_24dp"
+        android:orderInCategory="101"
+        app:showAsAction="ifRoom"
+        android:title="@string/jan_cd"/>
+</menu>

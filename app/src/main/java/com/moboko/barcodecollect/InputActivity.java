@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -68,7 +69,6 @@ public class InputActivity extends AppCompatActivity {
     TextView tvInputJanCd, tvInputRegisterDay, tvOutputPrice;
     RadioGroup rgTax, rgCategory;
     String sql;
-    Button btContinue;
     String url;
 
     private AdView mAdView;
@@ -77,14 +77,132 @@ public class InputActivity extends AppCompatActivity {
     private RelativeLayout llInput;
 
 
+    private int mMenuResourceId = R.menu.normal_input_menu;
+
+    // Menuを切り替えたい箇所から呼び出す
+    public void changeMenuItem(int menuResourceId) {
+        this.mMenuResourceId = menuResourceId;
+        supportInvalidateOptionsMenu();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(mMenuResourceId, menu);
+        return true;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
+            // 戻るボタンをタップ
             case android.R.id.home:
-                // 戻るボタンをタップ
                 setResult(RESULT_CANCELED, intent);
                 finish();
+                break;
+
+            //続けて登録ボタン
+            case R.id.bt_continue:
+                //押し出しチェック
+                connectDb();
+                SelectData selectItemCount = new SelectData(helper, db);
+                selectItemCount.setSql(SELECT_ITEM_COUNT_LIST);
+                selectItemCount.selectSql(null);
+                int count = selectItemCount.getCount();
+
+                // DBデータ件数が30件以上の場合
+                if (count >= MAX_ITEM_COUNT) {
+                    new AlertDialog.Builder(InputActivity.this)
+                            .setTitle(ALERT_MAX_ITEM_TITLE)
+                            .setMessage(ALERT_MAX_ITEM_MESSAGE)
+                            .setPositiveButton(ALERT_YES, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //最も古い明細削除
+                                    delOldData();
+                                    //入力データ登録
+                                    insertUpdateDate();
+                                    //キーボードを閉じる
+                                    keyClose();
+                                    //メインActivityへの戻り値セット
+                                    setResult(RE_CAPUTRE_RESPONSE, intent);
+                                    //メインActivityへ戻る
+                                    finish();
+                                }
+                            })
+                            .setNegativeButton(ALERT_NO, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .show();
+
+                } else {
+                    //入力データ登録
+                    insertUpdateDate();
+                    //キーボードを閉じる
+                    keyClose();
+                    //メインActivityへの戻り値セット
+                    setResult(RE_CAPUTRE_RESPONSE, intent);
+                    //メインActivityへ戻る
+                    finish();
+                }
+                break;
+
+            //完了ボタン
+            case R.id.bt_finish:
+                //バーコード登録時のみ、押し出しチェック
+                if (idProc.equals(INSERT_FLAG)) {
+                    //押し出しチェック
+                    connectDb();
+                    SelectData selectFinItemCount = new SelectData(helper, db);
+                    selectFinItemCount.setSql(SELECT_ITEM_COUNT_LIST);
+                    selectFinItemCount.selectSql(null);
+                    int finCount = selectFinItemCount.getCount();
+
+                    // DBデータ件数が30件以上の場合
+                    if (finCount >= MAX_ITEM_COUNT) {
+                        new AlertDialog.Builder(InputActivity.this)
+                                .setTitle(ALERT_MAX_ITEM_TITLE)
+                                .setMessage(ALERT_MAX_ITEM_MESSAGE)
+                                .setPositiveButton(ALERT_YES, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //最も古い明細削除
+                                        delOldData();
+                                        //入力データ登録
+                                        insertUpdateDate();
+                                        //キーボードを閉じる
+                                        keyClose();
+                                        //メインActivityへの戻り値セット
+                                        setResult(RESULT_OK, intent);
+                                        //メインActivityへ戻る
+                                        finish();
+                                    }
+                                })
+                                .setNegativeButton(ALERT_NO, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                })
+                                .show();
+
+                    } else {
+                        //入力データ登録
+                        insertUpdateDate();
+                        //キーボードを閉じる
+                        keyClose();
+                        //メインActivityへの戻り値セット
+                        setResult(RESULT_OK, intent);
+                        //メインActivityへ戻る
+                        finish();
+                    }
+                } else if (idProc.equals(UPDATE_FLAG)) {
+                    //入力データ登録
+                    insertUpdateDate();
+                    //キーボードを閉じる
+                    keyClose();
+                    //メインActivityへの戻り値セット
+                    setResult(RESULT_OK, intent);
+                    //メインActivityへ戻る
+                    finish();
+                }
                 break;
 
         }
@@ -118,9 +236,6 @@ public class InputActivity extends AppCompatActivity {
         llInput = findViewById(R.id.ll_input);
 
         Intent fromIntent = getIntent();
-
-        btContinue = this.findViewById(R.id.bt_continue);
-
         rgTax = findViewById(R.id.rg_tax);
         rgCategory = findViewById(R.id.rg_category);
         evInputMemo1 = findViewById(R.id.ev_input_memo1);
@@ -182,7 +297,7 @@ public class InputActivity extends AppCompatActivity {
             selectData.selectSql(req_id);
             itemList = selectData.getData(MODE_DEFAULT);
 
-            btContinue.setVisibility(View.GONE);
+            changeMenuItem(R.menu.option_input_menu);
 
             setUpdateValue();
         }
@@ -242,115 +357,6 @@ public class InputActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 setPrice((RadioButton) findViewById(rgTax.getCheckedRadioButtonId()), getPer(String.valueOf(evInputPer.getText())));
-            }
-        });
-
-
-        findViewById(R.id.bt_finish).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //バーコード登録時のみ、押し出しチェック
-                if(idProc.equals(INSERT_FLAG)) {
-                    //押し出しチェック
-                    connectDb();
-                    SelectData selectItemCount = new SelectData(helper, db);
-                    selectItemCount.setSql(SELECT_ITEM_COUNT_LIST);
-                    selectItemCount.selectSql(null);
-                    int count = selectItemCount.getCount();
-
-                    // DBデータ件数が30件以上の場合
-                    if(count >= MAX_ITEM_COUNT){
-                        new AlertDialog.Builder(InputActivity.this)
-                                .setTitle(ALERT_MAX_ITEM_TITLE)
-                                .setMessage(ALERT_MAX_ITEM_MESSAGE)
-                                .setPositiveButton(ALERT_YES, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        //最も古い明細削除
-                                        delOldData();
-                                        //入力データ登録
-                                        insertUpdateDate();
-                                        //キーボードを閉じる
-                                        keyClose();
-                                        //メインActivityへの戻り値セット
-                                        setResult(RESULT_OK, intent);
-                                        //メインActivityへ戻る
-                                        finish();
-                                    }
-                                })
-                                .setNegativeButton(ALERT_NO, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                    }
-                                })
-                                .show();
-
-                    } else {
-                        //入力データ登録
-                        insertUpdateDate();
-                        //キーボードを閉じる
-                        keyClose();
-                        //メインActivityへの戻り値セット
-                        setResult(RESULT_OK, intent);
-                        //メインActivityへ戻る
-                        finish();
-                    }
-                }  else if (idProc.equals(UPDATE_FLAG)) {
-                    //入力データ登録
-                    insertUpdateDate();
-                    //キーボードを閉じる
-                    keyClose();
-                    //メインActivityへの戻り値セット
-                    setResult(RESULT_OK, intent);
-                    //メインActivityへ戻る
-                    finish();
-                }
-            }
-        });
-
-        findViewById(R.id.bt_continue).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //押し出しチェック
-                connectDb();
-                SelectData selectItemCount = new SelectData(helper, db);
-                selectItemCount.setSql(SELECT_ITEM_COUNT_LIST);
-                selectItemCount.selectSql(null);
-                int count = selectItemCount.getCount();
-
-                // DBデータ件数が30件以上の場合
-                if(count >= MAX_ITEM_COUNT){
-                    new AlertDialog.Builder(InputActivity.this)
-                            .setTitle(ALERT_MAX_ITEM_TITLE)
-                            .setMessage(ALERT_MAX_ITEM_MESSAGE)
-                            .setPositiveButton(ALERT_YES, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    //最も古い明細削除
-                                    delOldData();
-                                    //入力データ登録
-                                    insertUpdateDate();
-                                    //キーボードを閉じる
-                                    keyClose();
-                                    //メインActivityへの戻り値セット
-                                    setResult(RE_CAPUTRE_RESPONSE, intent);
-                                    //メインActivityへ戻る
-                                    finish();
-                                }
-                            })
-                            .setNegativeButton(ALERT_NO, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                }
-                            })
-                            .show();
-
-                } else {
-                    //入力データ登録
-                    insertUpdateDate();
-                    //キーボードを閉じる
-                    keyClose();
-                    //メインActivityへの戻り値セット
-                    setResult(RE_CAPUTRE_RESPONSE, intent);
-                    //メインActivityへ戻る
-                    finish();
-                }
             }
         });
 
@@ -567,7 +573,7 @@ public class InputActivity extends AppCompatActivity {
         }
     }
 
-    protected void delOldData(){
+    protected void delOldData() {
         connectDb();
         SelectData selectItemCount = new SelectData(helper, db);
         selectItemCount.setSql(SELECT_OLD_ITEM_LIST);

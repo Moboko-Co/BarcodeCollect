@@ -1,81 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tool_bar_main"
-        android:paddingLeft="0dp"
-        android:paddingRight="0dp"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
+        android:paddingLeft="0dp"
+        android:paddingRight="5dp"
         android:theme="@style/ToolbarTheme"
         app:contentInsetStart="0dp">
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/toolbar_title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/toolbar_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/app_name"
-                android:layout_toLeftOf="@id/ib_jan_cd_search"
-                android:gravity="center"
-                android:textColor="@color/colorDetail"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:ignore="HardcodedText"
-                />
-            <Button
-                android:id="@+id/ib_jan_cd_search"
-                android:layout_toLeftOf="@+id/ib_edit_select"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:text="@string/scan"
-                android:textColor="@color/colorDetail"
-                android:drawableTop="@drawable/ic_barcode" />
-
-            <Button
-                android:id="@+id/ib_edit_select"
-                android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:text="@string/select"
-                android:textColor="@color/colorDetail"
-                android:drawableTop="@drawable/ic_check_box_24px" />
-
-            <Button
-                android:id="@+id/ib_copy_data"
-                android:layout_toLeftOf="@+id/ib_delete_data"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:text="@string/copy"
-                android:textColor="@color/colorDetail"
-                android:drawableTop="@drawable/ic_file_copy_24px"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@+id/ib_delete_data"
-                android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:text="@string/delete"
-                android:textColor="@color/colorDetail"
-                android:drawableTop="@drawable/ic_delete_24px"
-                android:visibility="gone" />
-
-        </RelativeLayout>
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/ib_jan_cd_search"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/colorDetail"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
@@ -87,14 +40,14 @@
             style="@style/app_top_item"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="15dp"
-            android:textSize="13sp"
-            android:text="@string/like_only" />
+            android:text="@string/like_only"
+            android:textSize="13sp" />
 
         <Spinner
             android:id="@+id/sp_sort_item"
             style="@style/app_top_item"
-            android:textSize="13sp"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:textSize="13sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -103,35 +56,28 @@
         android:orientation="horizontal"
         android:visibility="gone">
 
-<!--        <Button
-            android:id="@+id/bt_back"
-            style="@style/app_top_item"
-            android:layout_alignParentLeft="true"
-            android:background="@null"
-            android:text="@string/back" />-->
-
         <CheckBox
             android:id="@+id/cb_all_select"
-            android:layout_marginLeft="15dp"
             style="@style/app_top_item"
+            android:layout_marginLeft="15dp"
             android:layout_toLeftOf="@+id/cb_only_favorite"
-            android:textSize="13sp"
-            android:text="@string/all_select" />
+            android:text="@string/all_select"
+            android:textSize="13sp" />
 
         <CheckBox
             android:id="@+id/cb_only_favorite"
             style="@style/app_top_item"
             android:layout_alignParentRight="true"
-            android:textSize="13sp"
-            android:text="@string/like_only" />
+            android:text="@string/like_only"
+            android:textSize="13sp" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/item_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_marginTop="2dp"
+        android:layout_weight="1"
         android:scrollbars="vertical" />
 
     <View
@@ -139,65 +85,15 @@
         android:layout_height="1dp"
         android:background="@color/colorPrimaryDark" />
 
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/main_ad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="@string/ad_1">
-    </com.google.android.gms.ads.AdView>
-<!--
+        ads:adUnitId="@string/ad_1"></com.google.android.gms.ads.AdView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:baselineAligned="false"
-        android:background="@color/colorDetail"
-        android:gravity="bottom"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/ib_jan_cd_search"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:text="@string/scan"
-            android:drawableTop="@drawable/ic_barcode" />
-
-        <Button
-            android:id="@+id/ib_edit_select"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:text="@string/select"
-            android:drawableTop="@drawable/ic_check_box_24px" />
-
-        <Button
-            android:id="@+id/ib_copy_data"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:text="@string/copy"
-            android:drawableTop="@drawable/ic_file_copy_24px"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/ib_delete_data"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:text="@string/delete"
-            android:drawableTop="@drawable/ic_delete_24px"
-            android:visibility="gone" />
-    </LinearLayout>
--->
 
 </LinearLayout>
