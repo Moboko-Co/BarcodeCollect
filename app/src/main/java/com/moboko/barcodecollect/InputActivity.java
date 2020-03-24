@@ -76,23 +76,10 @@ public class InputActivity extends AppCompatActivity {
     InputMethodManager inputMethodManager;
     private RelativeLayout llInput;
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.detail_option_menu, menu);
-//        return true;
-//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
-//            case R.id.bt_finish:
-//                // ボタンをタップした際の処理を記述
-//                InsertUpdateDate();
-//
-//                setResult(RESULT_OK, intent);
-//                finish();
-//                break;
 
             case android.R.id.home:
                 // 戻るボタンをタップ
@@ -144,34 +131,24 @@ public class InputActivity extends AppCompatActivity {
         evInputItemNm = findViewById(R.id.ev_input_item_nm);
         evInputPer = findViewById(R.id.ev_input_per);
 
-        //DB セットアップ
-        if (helper == null) {
-            helper = new DbOpenHelper(getApplicationContext());
-        }
-
-        if (db == null) {
-            db = helper.getWritableDatabase();
-        }
-
-
         // 画面遷移元特定
         idProc = fromIntent.getStringExtra(ID_PROC);
-
-
-        SelectData selectCountData = new SelectData(helper, db);
-        final SelectData selectData = new SelectData(helper, db);
 
         // バーコードから遷移
         if (idProc.equals(INSERT_FLAG)) {
             // JAN_CD退避
             reqJanCd[0] = getIntent().getStringExtra(INSERT_PROC);
 
+            connectDb();
+            SelectData selectCountData = new SelectData(helper, db);
             sql = SELECT_COUNT_LIST + WHERE_JAN_CD;
             selectCountData.setSql(sql);
             selectCountData.selectSql(reqJanCd);
             int count = selectCountData.getCount();
 
             if (count > 0) {
+                connectDb();
+                final SelectData selectData = new SelectData(helper, db);
                 new AlertDialog.Builder(InputActivity.this)
                         .setTitle(ALERT_TITLE)
                         .setMessage(ALERT_MESSAGE)
@@ -197,6 +174,8 @@ public class InputActivity extends AppCompatActivity {
                 execFetch();
             }
         } else if (idProc.equals(UPDATE_FLAG)) {
+            connectDb();
+            SelectData selectData = new SelectData(helper, db);
             req_id[0] = fromIntent.getStringExtra(UPDATE_PROC);
             sql = SELECT_LIST + WHERE_DELETE_FLAG + WHERE_ID + ORDER_BY_LIST;
             selectData.setSql(sql);
@@ -216,7 +195,7 @@ public class InputActivity extends AppCompatActivity {
                 //イベントを取得するタイミングには、ボタンが押されてなおかつエンターキーだったときを指定
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     //キーボードを閉じる
-                    inputMethodManager.hideSoftInputFromWindow(evInputMemo1.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
+                    keyClose();
 
                     return true;
                 }
@@ -267,31 +246,111 @@ public class InputActivity extends AppCompatActivity {
         });
 
 
-
         findViewById(R.id.bt_finish).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InsertUpdateDate();
+                //バーコード登録時のみ、押し出しチェック
+                if(idProc.equals(INSERT_FLAG)) {
+                    //押し出しチェック
+                    connectDb();
+                    SelectData selectItemCount = new SelectData(helper, db);
+                    selectItemCount.setSql(SELECT_ITEM_COUNT_LIST);
+                    selectItemCount.selectSql(null);
+                    int count = selectItemCount.getCount();
 
-                setResult(RESULT_OK, intent);
-                finish();
+                    // DBデータ件数が30件以上の場合
+                    if(count >= MAX_ITEM_COUNT){
+                        new AlertDialog.Builder(InputActivity.this)
+                                .setTitle(ALERT_MAX_ITEM_TITLE)
+                                .setMessage(ALERT_MAX_ITEM_MESSAGE)
+                                .setPositiveButton(ALERT_YES, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //最も古い明細削除
+                                        delOldData();
+                                        //入力データ登録
+                                        insertUpdateDate();
+                                        //キーボードを閉じる
+                                        keyClose();
+                                        //メインActivityへの戻り値セット
+                                        setResult(RESULT_OK, intent);
+                                        //メインActivityへ戻る
+                                        finish();
+                                    }
+                                })
+                                .setNegativeButton(ALERT_NO, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                })
+                                .show();
+
+                    } else {
+                        //入力データ登録
+                        insertUpdateDate();
+                        //キーボードを閉じる
+                        keyClose();
+                        //メインActivityへの戻り値セット
+                        setResult(RESULT_OK, intent);
+                        //メインActivityへ戻る
+                        finish();
+                    }
+                }  else if (idProc.equals(UPDATE_FLAG)) {
+                    //入力データ登録
+                    insertUpdateDate();
+                    //キーボードを閉じる
+                    keyClose();
+                    //メインActivityへの戻り値セット
+                    setResult(RESULT_OK, intent);
+                    //メインActivityへ戻る
+                    finish();
+                }
             }
         });
-
-//        findViewById(R.id.bt_back).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                setResult(RESULT_CANCELED, intent);
-//                finish();
-//            }
-//        });
 
         findViewById(R.id.bt_continue).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InsertUpdateDate();
-                setResult(RE_CAPUTRE_RESPONSE, intent);
-                finish();
+                //押し出しチェック
+                connectDb();
+                SelectData selectItemCount = new SelectData(helper, db);
+                selectItemCount.setSql(SELECT_ITEM_COUNT_LIST);
+                selectItemCount.selectSql(null);
+                int count = selectItemCount.getCount();
+
+                // DBデータ件数が30件以上の場合
+                if(count >= MAX_ITEM_COUNT){
+                    new AlertDialog.Builder(InputActivity.this)
+                            .setTitle(ALERT_MAX_ITEM_TITLE)
+                            .setMessage(ALERT_MAX_ITEM_MESSAGE)
+                            .setPositiveButton(ALERT_YES, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //最も古い明細削除
+                                    delOldData();
+                                    //入力データ登録
+                                    insertUpdateDate();
+                                    //キーボードを閉じる
+                                    keyClose();
+                                    //メインActivityへの戻り値セット
+                                    setResult(RE_CAPUTRE_RESPONSE, intent);
+                                    //メインActivityへ戻る
+                                    finish();
+                                }
+                            })
+                            .setNegativeButton(ALERT_NO, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .show();
+
+                } else {
+                    //入力データ登録
+                    insertUpdateDate();
+                    //キーボードを閉じる
+                    keyClose();
+                    //メインActivityへの戻り値セット
+                    setResult(RE_CAPUTRE_RESPONSE, intent);
+                    //メインActivityへ戻る
+                    finish();
+                }
             }
         });
 
@@ -340,7 +399,7 @@ public class InputActivity extends AppCompatActivity {
         }
     }
 
-    private void InsertUpdateDate() {
+    private void insertUpdateDate() {
         // DbItemListセット
         DbItemList inputItem = new DbItemList();
         DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm");
@@ -387,12 +446,14 @@ public class InputActivity extends AppCompatActivity {
         inputItem2.setFavoriteFlag(0);
 
         if (idProc.equals(INSERT_FLAG)) {
+            connectDb();
             InsertData insertData = new InsertData(helper, db);
             insertData.setDbItemList(inputItem);
             insertData.insertDbItemList();
             insertData.setDbFavoriteList(inputItem2);
             insertData.insertDbFavoriteList();
         } else {
+            connectDb();
             UpdateData updateData = new UpdateData(helper, db);
             updateData.setDbItemList(inputItem);
             updateData.updateDbItemList(req_id);
@@ -480,7 +541,7 @@ public class InputActivity extends AppCompatActivity {
 
 
     // 数字セット（NULLの場合、0をセット）)
-    int setDigit(String str){
+    int setDigit(String str) {
         int num;
 
         if (checks.isNull(str)) {
@@ -489,5 +550,32 @@ public class InputActivity extends AppCompatActivity {
             num = Integer.parseInt(str);
         }
         return num;
+    }
+
+
+    void keyClose() {
+        inputMethodManager.hideSoftInputFromWindow(evInputMemo1.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
+    }
+
+    protected void connectDb() {
+        if (helper == null) {
+            helper = new DbOpenHelper(getApplicationContext());
+        }
+
+        if (db == null) {
+            db = helper.getWritableDatabase();
+        }
+    }
+
+    protected void delOldData(){
+        connectDb();
+        SelectData selectItemCount = new SelectData(helper, db);
+        selectItemCount.setSql(SELECT_OLD_ITEM_LIST);
+        selectItemCount.selectSql(null);
+        String[] old_Id = new String[1];
+        old_Id[0] = String.valueOf(selectItemCount.get_Id());
+
+        UpdateData updateData = new UpdateData(helper, db);
+        updateData.updateOldDbItemList(old_Id);
     }
 }

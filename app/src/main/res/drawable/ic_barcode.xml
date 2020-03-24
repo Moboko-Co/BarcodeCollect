@@ -6,46 +6,46 @@
   <path
       android:pathData="M2.1072,2.8735h1.8623v18.1485h-1.8623z"
       android:strokeWidth="0.98982584"
-      android:fillColor="@color/colorPrimary"
+      android:fillColor="@color/colorDetail"
       android:fillAlpha="1"/>
   <path
       android:pathData="M5.5509,2.8735h1.3663v18.1485h-1.3663z"
       android:strokeWidth="0.84783459"
-      android:fillColor="@color/colorPrimary"
+      android:fillColor="@color/colorDetail"
       android:fillAlpha="1"/>
   <path
       android:pathData="M7.5976,2.8735h1.7228v18.1485h-1.7228z"
       android:strokeWidth="0.95202023"
-      android:fillColor="@color/colorPrimary"
+      android:fillColor="@color/colorDetail"
       android:fillAlpha="1"/>
   <path
       android:pathData="M9.983,2.8735h2.436v18.1485h-2.436z"
       android:strokeWidth="1.13207459"
-      android:fillColor="@color/colorPrimary"
+      android:fillColor="@color/colorDetail"
       android:fillAlpha="1"/>
   <path
       android:pathData="M13.5974,2.8735h0.9228v18.1485h-0.9228z"
       android:strokeWidth="0.69677317"
-      android:fillColor="@color/colorPrimary"
+      android:fillColor="@color/colorDetail"
       android:fillAlpha="1"/>
   <path
       android:pathData="M15.2267,2.8735h1.9071v18.1485h-1.9071z"
       android:strokeWidth="1.001652"
-      android:fillColor="@color/colorPrimary"
+      android:fillColor="@color/colorDetail"
       android:fillAlpha="1"/>
   <path
       android:pathData="M17.647,2.8735h0.6238v18.1485h-0.6238z"
       android:strokeWidth="0.57285136"
-      android:fillColor="@color/colorPrimary"
+      android:fillColor="@color/colorDetail"
       android:fillAlpha="1"/>
   <path
       android:pathData="M19.2707,2.8735h1.326v18.149h-1.326z"
       android:strokeWidth="0.86606967"
-      android:fillColor="@color/colorPrimary"
+      android:fillColor="@color/colorDetail"
       android:fillAlpha="1"/>
   <path
       android:pathData="M21.1188,2.874h0.802v18.1485h-0.802z"
       android:strokeWidth="0.64955235"
-      android:fillColor="@color/colorPrimary"
+      android:fillColor="@color/colorDetail"
       android:fillAlpha="1"/>
 </vector>

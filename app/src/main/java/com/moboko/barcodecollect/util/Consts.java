@@ -13,6 +13,7 @@ public class Consts {
     public static final String CANCELED_MESSAGE = "キャンセルされました";
     public static final String SUCCESS_MESSAGE = "登録に成功しました";
     public static final String COPY_MESSAGE = "クリップボードにコピーしました";
+    public static final String COPY_ERROR_MESSAGE = "コピー対象がありません";
 
     public static final int RE_CAPUTRE_RESPONSE = 10;
 
@@ -66,7 +67,7 @@ public class Consts {
             "CREATE TABLE IF NOT EXISTS " + ITEM_LIST_TABLE + " (" +
                     ID + " integer primary key autoincrement," +
                     JAN_CD + " TEXT," +
-                    ITEM_NM +  " TEXT," +
+                    ITEM_NM + " TEXT," +
                     CATEGORY_CD + " TEXT," +
                     PRICE + " INTEGER," +
                     TAX_DIV + " TEXT," +
@@ -103,6 +104,21 @@ public class Consts {
                     + " FROM   itemList a,favoriteList b"
                     + " WHERE a._id = b._id";
 
+    public static final String SELECT_OLD_ITEM_LIST =
+            "SELECT a._id"
+                    + " FROM   itemList a"
+                    + ",(SELECT min(b._id) as _id FROM itemList b WHERE b.deleteFlag = '0') c"
+                    + " WHERE a._id = c._id";
+
+    public static final String SELECT_ITEM_COUNT_LIST =
+            "SELECT count(a._id)"
+                    + " FROM   itemList a,favoriteList b"
+                    + " WHERE a._id = b._id"
+                    + " AND   a.deleteFlag = '0'";
+
+    public static final int MAX_ITEM_COUNT = 30;
+
+
     public static final double TAX_PER_0 = 1;
     public static final double TAX_PER_8 = 1.08;
     public static final double TAX_PER_10 = 1.1;
@@ -117,6 +133,9 @@ public class Consts {
 
     public static final String ALERT_TITLE = "過去履歴あり";
     public static final String ALERT_MESSAGE = "履歴から参照入力しますか？";
+
+    public static final String ALERT_MAX_ITEM_TITLE = "登録可能件数 ： " + MAX_ITEM_COUNT + "件超過";
+    public static final String ALERT_MAX_ITEM_MESSAGE = "最も古い明細を削除します。宜しいでしょうか。";
 
     public static final String DEL_ALERT_TITLE = "データ削除";
     public static final String DEL_ALERT_MESSAGE = "元に戻すことはできません。宜しいでしょうか。";
@@ -144,11 +163,11 @@ public class Consts {
     public static final Map<Integer, String> ORDER_BY = Collections.unmodifiableMap(new HashMap<Integer, String>() {{
         put(0, " ORDER BY a._id desc");
         put(1, " ORDER BY a._id");
-        put(2, " ORDER BY a.categoryCd");
-        put(3, " ORDER BY a.janCd");
-        put(4, " ORDER BY a.janCd desc");
-        put(5, " ORDER BY a.taxPrice desc");
-        put(6, " ORDER BY a.taxPrice");
+        put(2, " ORDER BY a.categoryCd asc,a._id desc");
+        put(3, " ORDER BY a.janCd asc,a._id desc");
+        put(4, " ORDER BY a.janCd desc,a._id desc");
+        put(5, " ORDER BY a.taxPrice desc,a._id desc");
+        put(6, " ORDER BY a.taxPrice asc,a._id desc");
     }});
 
 
@@ -165,7 +184,7 @@ public class Consts {
 
 
     public static final String SQL_INSERT_ITEM_LIST_NEW = "INSERT INTO "
-        + ITEM_LIST_TABLE + " ("
+            + ITEM_LIST_TABLE + " ("
             + ID + ","
             + JAN_CD + ","
             + ITEM_NM + ","
@@ -176,7 +195,7 @@ public class Consts {
             + TAX_PRICE + ","
             + MEMO1 + ","
             + DELETE_FLAG + ","
-            + REGISTER_DAY +") "
+            + REGISTER_DAY + ") "
             + " SELECT "
             + ID + ","
             + JAN_CD + ","

@@ -8,19 +8,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -44,7 +40,42 @@ import com.moboko.barcodecollect.view.PostAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.moboko.barcodecollect.util.Consts.*;
+import static com.moboko.barcodecollect.util.Consts.ALERT_NO;
+import static com.moboko.barcodecollect.util.Consts.ALERT_YES;
+import static com.moboko.barcodecollect.util.Consts.CANCELED_MESSAGE;
+import static com.moboko.barcodecollect.util.Consts.CAPTURE_REQUEST;
+import static com.moboko.barcodecollect.util.Consts.CLIP_BOARD_TAX_1;
+import static com.moboko.barcodecollect.util.Consts.CLIP_BOARD_TAX_2;
+import static com.moboko.barcodecollect.util.Consts.CLIP_BOARD_TAX_3;
+import static com.moboko.barcodecollect.util.Consts.COPY_ERROR_MESSAGE;
+import static com.moboko.barcodecollect.util.Consts.COPY_MESSAGE;
+import static com.moboko.barcodecollect.util.Consts.DELETE_FLAG;
+import static com.moboko.barcodecollect.util.Consts.DEL_ALERT_MESSAGE;
+import static com.moboko.barcodecollect.util.Consts.DEL_ALERT_TITLE;
+import static com.moboko.barcodecollect.util.Consts.FAVORITE_SHOW_MODE;
+import static com.moboko.barcodecollect.util.Consts.ID;
+import static com.moboko.barcodecollect.util.Consts.ID_PROC;
+import static com.moboko.barcodecollect.util.Consts.INSERT_FLAG;
+import static com.moboko.barcodecollect.util.Consts.INSERT_PROC;
+import static com.moboko.barcodecollect.util.Consts.INSERT_REQUEST;
+import static com.moboko.barcodecollect.util.Consts.ITEM_LIST_TABLE;
+import static com.moboko.barcodecollect.util.Consts.MODE_DEFAULT;
+import static com.moboko.barcodecollect.util.Consts.NORMAL_MODE;
+import static com.moboko.barcodecollect.util.Consts.OPTION_ALL_FAVORITE;
+import static com.moboko.barcodecollect.util.Consts.OPTION_ALL_SELECT;
+import static com.moboko.barcodecollect.util.Consts.OPTION_MODE;
+import static com.moboko.barcodecollect.util.Consts.OPTION_ZERO_FAVORITE;
+import static com.moboko.barcodecollect.util.Consts.OPTION_ZERO_SELECT;
+import static com.moboko.barcodecollect.util.Consts.ORDER_BY;
+import static com.moboko.barcodecollect.util.Consts.RE_CAPUTRE_RESPONSE;
+import static com.moboko.barcodecollect.util.Consts.SELECTED_ERROR;
+import static com.moboko.barcodecollect.util.Consts.SELECT_LIST;
+import static com.moboko.barcodecollect.util.Consts.SORT_TITLE;
+import static com.moboko.barcodecollect.util.Consts.SUCCESS_MESSAGE;
+import static com.moboko.barcodecollect.util.Consts.UPDATE_FLAG;
+import static com.moboko.barcodecollect.util.Consts.UPDATE_PROC;
+import static com.moboko.barcodecollect.util.Consts.WHERE_DELETE_FLAG;
+import static com.moboko.barcodecollect.util.Consts.WHERE_ID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     private DbOpenHelper helper;
     private SQLiteDatabase db;
     Button ibJanCdSearch, ibEditSelect, ibCopyData, ibDeleteData;
-//    Button btBack;
+    //    Button btBack;
     LinearLayout rlNormalOption, rlEditOption;
     CheckBox cbShowFavorite, cbAllSelect, cbOnlyFavorite;
     Spinner spSortItem;
@@ -121,9 +152,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 currentSortOption = position;
-                if(cbShowFavorite.isChecked()){
+                if (cbShowFavorite.isChecked()) {
                     rvListSet((RecyclerView) findViewById(R.id.item_rv), FAVORITE_SHOW_MODE);
-                }else {
+                } else {
                     rvListSet((RecyclerView) findViewById(R.id.item_rv), NORMAL_MODE);
                 }
             }
@@ -162,18 +193,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //オプションモード｜戻るボタン
-//        btBack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (cbShowFavorite.isChecked() == true) {
-//                    rvListSet((RecyclerView) findViewById(R.id.item_rv), FAVORITE_SHOW_MODE);
-//                } else {
-//                    rvListSet((RecyclerView) findViewById(R.id.item_rv), NORMAL_MODE);
-//                }
-//            }
-//        });
-
         //オプションモード｜コピーボタン
         ibCopyData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,69 +200,70 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<Integer> mSelectList = postAdapter.getSelectList();
                 int count = mSelectList.size();
 
-                connectDb();
+                if (count == 0) {
+                    Toast.makeText(MainActivity.this, COPY_ERROR_MESSAGE, Toast.LENGTH_LONG).show();
+                } else {
+                    String input;
+                    String separateCd = ",";
 
-                String input = new String();
-                String separateCd = ",";
+                    input = "JANコード,商品名,カテゴリ,お気に入り,金額,税率,計算後金額,メモ１,メモ２,登録日\n";
 
-                input = "JANコード,商品名,カテゴリ,お気に入り,金額,税率,計算後金額,メモ１,メモ２,登録日\n";
+                    for (int i = 0; i < count; i++) {
 
-                for (int i = 0; i < count; i++) {
+                        SelectData selectCopyData = new SelectData(helper, db);
+                        String _idPrms[] = new String[1];
+                        _idPrms[0] = String.valueOf(mSelectList.get(i));
+                        List<ItemList> list = selectId(selectCopyData, _idPrms).getData(MODE_DEFAULT);
+                        input = input + list.get(0).getJanCd();
+                        input = input + separateCd;
+                        input = input + list.get(0).getItemNm();
+                        input = input + separateCd;
+                        input = input + list.get(0).getCategoryCd();
+                        input = input + separateCd;
+                        input = input + list.get(0).getFavoriteFlag();
+                        input = input + separateCd;
+                        input = input + list.get(0).getPrice();
+                        input = input + separateCd;
+                        switch (list.get(0).getTaxDiv()) {
+                            case "1":
+                                input = input + CLIP_BOARD_TAX_1;
+                                input = input + separateCd;
+                                input = input + list.get(0).getPrice();
+                                break;
+                            case "2":
+                                input = input + CLIP_BOARD_TAX_2;
+                                input = input + separateCd;
+                                input = input + (int) Math.floor(list.get(0).getPrice() * 1.1);
+                                break;
+                            case "3":
+                                input = input + CLIP_BOARD_TAX_3;
+                                input = input + separateCd;
+                                input = input + (int) Math.floor(list.get(0).getPrice() * 1.08);
 
-                    SelectData selectCopyData = new SelectData(helper, db);
-                    String _idPrms[] = new String[1];
-                    _idPrms[0] = String.valueOf(mSelectList.get(i));
-                    List<ItemList> list = selectId(selectCopyData, _idPrms).getData(MODE_DEFAULT);
-                    input = input + list.get(0).getJanCd();
-                    input = input + separateCd;
-                    input = input + list.get(0).getItemNm();
-                    input = input + separateCd;
-                    input = input + list.get(0).getCategoryCd();
-                    input = input + separateCd;
-                    input = input + list.get(0).getFavoriteFlag();
-                    input = input + separateCd;
-                    input = input + list.get(0).getPrice();
-                    input = input + separateCd;
-                    switch (list.get(0).getTaxDiv()) {
-                        case "1":
-                            input = input + CLIP_BOARD_TAX_1;
-                            input = input + separateCd;
-                            input = input + list.get(0).getPrice();
-                            break;
-                        case "2":
-                            input = input + CLIP_BOARD_TAX_2;
-                            input = input + separateCd;
-                            input = input + (int) Math.floor(list.get(0).getPrice() * 1.1);
-                            break;
-                        case "3":
-                            input = input + CLIP_BOARD_TAX_3;
-                            input = input + separateCd;
-                            input = input + (int) Math.floor(list.get(0).getPrice() * 1.08);
-
-                            break;
+                                break;
+                        }
+                        input = input + separateCd;
+                        input = input + list.get(0).getMemo1();
+                        input = input + separateCd;
+                        input = input + list.get(0).getRegisterDay();
+                        if (i != count - 1) {
+                            input = input + "\n";
+                        }
                     }
-                    input = input + separateCd;
-                    input = input + list.get(0).getMemo1();
-                    input = input + separateCd;
-                    input = input + list.get(0).getRegisterDay();
-                    if (i != count - 1) {
-                        input = input + "\n";
-                    }
+                    //クリップボードに格納するItemを作成
+                    ClipData.Item item = new ClipData.Item(input);
+                    //MIMETYPEの作成
+                    String[] mimeType = new String[1];
+                    mimeType[0] = ClipDescription.MIMETYPE_TEXT_PLAIN;
+                    //クリップボードに格納するClipDataオブジェクトの作成
+                    ClipData cd = new ClipData(new ClipDescription("text_data", mimeType), item);
+
+                    //クリップボードにデータを格納
+                    ClipboardManager cm = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                    cm.setPrimaryClip(cd);
+
+                    Toast.makeText(MainActivity.this, COPY_MESSAGE, Toast.LENGTH_LONG).show();
                 }
-                //クリップボードに格納するItemを作成
-                ClipData.Item item = new ClipData.Item(input);
-                //MIMETYPEの作成
-                String[] mimeType = new String[1];
-                mimeType[0] = ClipDescription.MIMETYPE_TEXT_PLAIN;
-                //クリップボードに格納するClipDataオブジェクトの作成
-                ClipData cd = new ClipData(new ClipDescription("text_data", mimeType), item);
-
-                //クリップボードにデータを格納
-                ClipboardManager cm = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                cm.setPrimaryClip(cd);
-
-                Toast.makeText(MainActivity.this, COPY_MESSAGE, Toast.LENGTH_LONG).show();
-
             }
         });
 
@@ -348,19 +368,16 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, CAPTURE_REQUEST);
     }
 
-    protected void rvListSet(RecyclerView rvList, int selectMode) {
+    protected void rvListSet(RecyclerView rvList, final int selectMode) {
         connectDb();
 
         if (selectMode == FAVORITE_SHOW_MODE) {
-            String favPrms[] = new String[1];
-            favPrms[0] = "1";
             setViewNormal();
             SelectData selectFavoriteShow = new SelectData(helper, db);
-            itemList = selectFavorite(selectFavoriteShow, favPrms).getData(FAVORITE_SHOW_MODE);
+            itemList = selectFavorite(selectFavoriteShow, null).getData(FAVORITE_SHOW_MODE);
 
         } else if (selectMode == NORMAL_MODE) {
             setViewNormal();
-
             SelectData selectNormalShow = new SelectData(helper, db);
             itemList = selectNormal(selectNormalShow, null).getData(NORMAL_MODE);
 
@@ -431,6 +448,15 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra(ID_PROC, UPDATE_FLAG);
                         startActivityForResult(intent, INSERT_REQUEST);
                         break;
+                    case R.id.cb_select:
+                        postAdapter.setmSelectMode(OPTION_MODE);
+                        if (selectMode == OPTION_ALL_SELECT) {
+                            cbAllSelect.setChecked(false);
+                        } else if (selectMode == OPTION_ALL_FAVORITE) {
+                            cbOnlyFavorite.setChecked(false);
+                        }
+
+                        break;
                 }
             }
         });
@@ -456,7 +482,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private SelectData selectFavorite(SelectData getRes, String Prms[]) {
-        String sql = SELECT_LIST + WHERE_DELETE_FLAG + WHERE_FAVORITE_FLAG + ORDER_BY.get(currentSortOption);
+        String sql = SELECT_LIST + WHERE_DELETE_FLAG + ORDER_BY.get(currentSortOption);
         getRes.setSql(sql);
         getRes.selectSql(Prms);
         return getRes;

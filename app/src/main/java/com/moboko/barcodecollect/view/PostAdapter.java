@@ -37,7 +37,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
         mContext = context;
         itemLists = itemList;
         mSelectMode = selectMode;
+    }
 
+    public void setmSelectMode(int mSelectMode){
+        this.mSelectMode = mSelectMode;
     }
 
     public void setOnItemClickListener(View.OnClickListener listener) {
@@ -89,7 +92,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
             }
         }
 
-        holder.ivLabelImg.setText(String.valueOf(pos + 1));
+        holder.ivLabelImg.setText(String.valueOf(item.getSeq()));
         holder.tvItemNm.setText(item.getItemNm());
         holder.bJanCd.setText(item.getJanCd());
 
@@ -124,8 +127,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
         holder.llItemDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                m_line = pos; //行数を登録
-                m_listener.onClick(view);
+                if(mSelectMode == NORMAL_MODE || mSelectMode == FAVORITE_SHOW_MODE){
+                    m_line = pos; //行数を登録
+                    m_listener.onClick(view);
+                }
             }
         });
 
@@ -143,6 +148,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
                 if (holder.cbSelect.isPressed()) {
                     item.setCbSelected(isChecked);
                     itemLists.set(position, item);
+                    if(mSelectMode == OPTION_ALL_SELECT || mSelectMode == OPTION_ALL_FAVORITE){
+                        m_listener.onClick(buttonView);
+                    }
                 }
             }
         });
@@ -150,10 +158,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostViewHolder> {
         holder.bJanCd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String uri = MONO_URI_HEAD + item.getJanCd() + MONO_URI_TAIL;
-                Intent monoIntent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse(uri));
-                mContext.startActivity(monoIntent);
+                if(mSelectMode == NORMAL_MODE || mSelectMode == FAVORITE_SHOW_MODE) {
+                    String uri = MONO_URI_HEAD + item.getJanCd() + MONO_URI_TAIL;
+                    Intent monoIntent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse(uri));
+                    mContext.startActivity(monoIntent);
+                }
             }
         });
     }

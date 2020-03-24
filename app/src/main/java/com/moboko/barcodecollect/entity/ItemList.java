@@ -13,6 +13,7 @@ public class ItemList {
     String memo1;
     int favoriteFlag;
     boolean cbSelected;
+    int seq;
 
     public int getTaxPrice() {
         return taxPrice;
@@ -108,5 +109,13 @@ public class ItemList {
 
     public void setSalePer(int salePer) {
         this.salePer = salePer;
+    }
+
+    public int getSeq() {
+        return seq;
+    }
+
+    public void setSeq(int seq) {
+        this.seq = seq;
     }
 }

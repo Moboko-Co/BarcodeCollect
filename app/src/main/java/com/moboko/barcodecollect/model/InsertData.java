@@ -65,5 +65,4 @@ public class InsertData {
         return true;
     }
 
-
 }

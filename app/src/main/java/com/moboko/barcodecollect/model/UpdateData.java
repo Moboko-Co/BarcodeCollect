@@ -46,6 +46,16 @@ public class UpdateData {
         return true;
     }
 
+    public boolean updateOldDbItemList(String prm[]) {
+        String sql = "update itemList set "
+                + DELETE_FLAG  + " = '1' "
+                + "where " + ID + " = ?";
+        Cursor cursor = db.rawQuery(sql, prm);
+        cursor.moveToFirst();
+        cursor.close();
+        return true;
+    }
+
     public boolean updateDbFavoriteList(String prm[]) {
         String sql = "update favoriteList set "
                 + FAVORITE_FLAG  + " = " + dbFavoriteList.getFavoriteFlag()
